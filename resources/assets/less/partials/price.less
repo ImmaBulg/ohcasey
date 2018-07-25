@@ -1,0 +1,44 @@
+.price {
+	display: block;
+	font-size: 18px;
+	font-weight: bold;
+	opacity: 0.9;
+	position: relative;
+	color: @defcol;
+	
+	&:after {
+		content: '\f158';
+		font-family: @fa;
+		display: inline;
+		font-size: 16px;
+		margin: 0 0 0 5px;
+	}
+	
+	&--old + & {
+		display: inline-block;
+	}
+	
+	&--old {
+	    display: inline-block;
+	    font-weight: 400;
+	    font-size: 14px;
+	    color: @beige;
+	    margin-right: 5px;
+		
+		&:before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			height: 1px;
+			width: 100%;
+			margin-top: -1px;
+			background-color: @beige;
+		}
+	    
+	    &:after {
+	    	font-size: 13px;
+	    	olor: @beige;
+	    	margin-left: 3px;
+	    }
+	}
+}

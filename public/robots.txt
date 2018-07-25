@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+Disallow: /css
+Disallow: /fonts
+Disallow: /images
+Disallow: /img
+Disallow: /js
+Disallow: /orders
+Disallow: /storage
+Disallow: /tmp
+Disallow: /backend
+Disallow: /admin
+Disallow: *index.php*
+Disallow: *cart/empty
+Disallow: /*_openstat
+Disallow: /*gclid=
+Disallow: /*utm_source=
+Disallow: *utm_medium=
+Disallow: *utm_campaign=
+Allow: /images/product/*
+
+Host: ohcasey.store
+
+Sitemap: http://ohcasey.store/sitemap.xml

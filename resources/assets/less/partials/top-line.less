@@ -1,0 +1,139 @@
+.top-line {
+	text-align: center;
+	background-color: #000;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	color: #d6d6d6;
+	font-size: 14px;
+    z-index: 100000;
+    -webkit-transition: transform .3s;
+    transition: transform .3s;
+
+	&__text {
+		padding: 7px 40px;
+	}
+
+	&__close {
+		position: absolute;
+		top: 50%;
+		right: 19px;
+		height: 11px;
+		width: 11px;
+		margin: -5px 0 0;
+		-webkit-transition: opacity .3s ease;
+		transition: opacity .3s ease;
+
+		&::before, &::after {
+			content: '';
+			position: absolute;
+			background-color: #fff;
+			width: 100%;
+			height: 1px;
+			top: 5px;
+			-webkit-transition: background-color .3s;
+			transition: background-color .3s;
+		}
+
+		&::before {
+			left: 0;
+			-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+
+		&::after {
+			right: 0;
+			-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+		}
+
+		&:hover {
+			opacity: .7;
+		}
+	}
+
+	&.is-hidden {
+		-webkit-transform: translateY(-100%);
+		transform: translateY(-100%);
+		display: none;
+	}
+
+	& ~ .header {
+		padding-top: 34px;
+	}
+
+	&.is-hidden ~ .header {
+		padding-top: 0;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.top-line {
+		&__close {
+			&:hover {
+				&::before, &::after {
+					background-color: @beige;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.top-line {
+		& ~ .header {
+			.nav {
+				padding-top: 99px;
+			}
+		}
+
+		&.is-hidden ~ .header {
+			.nav {
+				padding-top: 64px;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.top-line {
+		&__text {
+			height: 50px;
+			padding: 4px 40px;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		& ~ .header {
+			padding-top: 50px;
+
+			.nav {
+				padding-top: 115px;
+			}
+		}
+
+		&.is-hidden ~ .header {
+			.nav {
+				padding-top: 50px;
+			}
+		}
+	}
+}
+
+
+@media screen and (max-width: 500px) {
+	.top-line {
+		&__text {
+			height: 70px;
+		    padding: 4px 20px;
+		}
+
+		& ~ .header {
+			padding-top: 70px;
+		}
+	}
+}

@@ -1,0 +1,143 @@
+.main-nav {
+	text-align: center;
+	font-size: 0;
+	margin: 41px 0;
+	font-family: @avenir;
+	
+	&__item {
+		display: inline-block;
+		margin: 0 15px;
+		position: relative;
+		
+		&:nth-of-type(n+4) {
+			.drop-nav {
+				right: -30px;
+				left: auto;
+			}
+		}
+		
+		&--hidden {
+			display: none;
+		}
+	}
+	
+	&__link {
+		display: block;
+		font-size: 12px;
+		font-weight: bold;
+		letter-spacing: 1.5px;
+		color: @defcol;
+		text-transform: uppercase;
+		-webkit-transition: color .3s;
+		transition: color .3s;
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.main-nav {
+		&__item {
+			&:hover {
+				.main-nav__link {
+					color: @beige;
+				}
+				.drop-nav {
+					visibility: visible;
+					opacity: 1;
+					-webkit-transition: opacity .3s ease;
+					transition: opacity .3s ease;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1199px) {
+	.main-nav {
+		&__item {
+			margin: 0 10px;
+		}
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.main-nav {
+		display: block;
+		margin: 0;
+		text-align: left;
+		height: calc(~"100% - 92px");
+		overflow: auto;
+		
+		&__item {
+			display: block;
+			margin: 0;
+			padding: 10px 0;
+			
+			&--border {
+				border-bottom: 1px solid #e4e4e4 !important;
+				padding: 10px 0 30px;
+			}
+		}
+		
+		&__link {
+			font-size: 16px;
+			font-weight: 400;
+			text-transform: none;
+			padding: 4px 10px 4px 50px;
+			letter-spacing: normal;
+			
+			&--has-drop, &--contcructor {
+				font-size: 14px;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+			
+			&--has-drop {
+				position: relative;
+				
+				&::before, &::after {
+					content: '';
+					position: absolute;
+					background-color: #000;
+					top: 50%;
+				}
+				
+				&::before {
+					width: 10px;
+				    height: 2px;
+				    left: 20px;
+				    margin: -1px 0 0;
+				}
+				
+				&::after {
+				    width: 2px;
+				    height: 10px;
+				    left: 24px;
+				    margin: -5px 0 0;
+				    -webkit-transition: opacity .3s;
+				    transition: opacity .3s;
+				}
+			}
+			
+			&--contcructor {
+				position: relative;
+				
+				&::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					height: 100%;
+					width: 5px;
+					background-color: #bf8a7e;
+				}
+			}
+			
+			&.is-opened {
+				&::after {
+					opacity: 0;
+				}
+			}
+		}
+	}
+}
+

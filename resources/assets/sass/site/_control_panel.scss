@@ -1,0 +1,27 @@
+// Control panel
+#control-panel {
+    .control-panel-wrapper {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .control-panel-title {
+            border-bottom: 1px solid #666;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 5px;
+            padding: 15px 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .control-panel-content {
+            position: absolute;
+            top: 60px;
+            bottom: 0;
+            width: 100%;
+        }
+    }
+}

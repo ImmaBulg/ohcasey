@@ -1,0 +1,53 @@
+.breadcrumbs {
+	margin: 0 0 30px;
+	
+	&__item {
+		font-size: 14px;
+		display: inline-block;
+	}
+	
+	&__link {
+		font-size: 14px;
+		color: @defcol;
+		-webkit-transition: color .3s;
+		transition: color .3s;
+		position: relative;
+		padding: 0 20px 0 0;
+    	margin: 0 5px 0 0;
+		
+		&::after {
+			content: '\02192';
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+	}
+	
+	&__text {
+		color: #6f6f6f;
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.breadcrumbs {
+		&__link {
+			color: @defcol;
+			
+			&:hover {
+				color: @beige;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.breadcrumbs {
+		padding: 0 16px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.breadcrumbs {
+		/*display: none; */
+	}
+}

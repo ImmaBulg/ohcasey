@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+    
+    RewriteCond %{HTTP_HOST} ohcasey.ru
+    RewriteRule (.*) http://ohcasey.store/$1 [R=301,L]
+
+
+    #frontend
+    RewriteCond %{REQUEST_URI} !^(\/admin)|(\/api)
+    RewriteRule ^(.*)$ frontend/web/$1 [L]
+
+    #api
+    RewriteCond %{REQUEST_URI} !^\/admin
+    RewriteRule ^(.*)$ api/web/$1 [L]
+
+    #backend
+    RewriteCond %{REQUEST_URI} !^\/api
+    RewriteRule ^(.*)$ backend/web/$1 [L]
+
+</IfModule>

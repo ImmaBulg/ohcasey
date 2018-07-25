@@ -1,0 +1,15 @@
+a.well{
+    color: #000000;
+}
+.stat-block-container{
+    width: 100%;
+    overflow-x: scroll;
+}
+.stat-cell{
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    float: left;
+    width: 215px;
+}

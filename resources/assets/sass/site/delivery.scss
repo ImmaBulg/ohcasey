@@ -1,0 +1,408 @@
+#content {
+    background: #fff;
+}
+
+.hidden-element {
+    display: none;
+}
+
+#map, #map-showroom {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    float: left;
+    padding-bottom: 50px;
+}
+
+#map.spin, #map-showroom.spin {
+    background: url(../img/loader-spin.gif) center no-repeat;
+}
+
+.sdec-point-list .spin {
+    background: url(../img/loader-spin.gif) center no-repeat;
+    width: 100%;
+    height: 200px;
+    position: relative;
+    text-align: center;
+}
+
+.not-moscow.spin {
+    background: url(../img/loader-spin.gif) center no-repeat;
+    height: 126px;
+}
+
+.central_block {
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.error {
+    border: 1px solid red;
+}
+
+a {
+    color: #669AC4;
+}
+
+h1 {
+    color: #262424;
+    font-size: 18px; /* Приближение из-за подстановки шрифтов */
+    font-weight: 300;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+select {
+    width: 100%;
+    position: relative;
+}
+
+.bootstrap-select {
+    width: 100% !important;
+    border-radius: 0;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    text-align: center;
+    color: #405e88;
+    font-size: 20px;
+}
+
+.caret {
+
+}
+
+.form-control {
+    border-radius: 0;
+    color: #405e88;
+    box-shadow: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.colons {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.item {
+    padding: 0;
+    cursor: pointer;
+    transition: 100ms all linear;
+    margin-top: 10px;
+    border: 1px solid #4795d3;
+
+}
+
+.item.active, .item:hover {
+    background: #4795d3;
+}
+
+.colons div.item_block {
+    padding: 0;
+}
+
+.colons div.item_block:first-child {
+    padding-left: 0;
+    padding-right: 10px;
+
+}
+
+.colons div.item_block:last-child {
+    padding-right: 0;
+    padding-left: 10px;
+}
+
+.item h2 {
+    width: 100%;
+    color: #656565;
+    margin-top: 15px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bolder;
+    padding-top: 0;
+    height: 30px;
+}
+
+.item.active h2, .item:hover h2 {
+    color: #ffffff;
+}
+
+.cost {
+    line-height: 60px;
+    padding-bottom: 10px;
+    display: block;
+    color: #4795d3;
+    font-size: 24px;
+}
+
+.item.active .cost, .item:hover .cost {
+    color: white;
+}
+
+.item .glyphicon {
+    font-size: 22px;
+    color: #656565;
+    margin-right: 4px;
+}
+
+.item.active .glyphicon, .item:hover .glyphicon {
+    color: white;
+}
+
+.item.active .text, .item:hover .text {
+    color: white;
+}
+
+.item.active strong, .item:hover strong {
+    color: white
+}
+
+/*Заглушки, когда не выбран город*/
+.placeholder {
+    height: 137px;
+    padding: 0;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+.placeholder h2 {
+    color: #999;
+    font-weight: normal;
+    width: 100%;
+    margin-top: 15px;
+    font-size: 16px;
+    text-align: center;
+    padding-top: 0;
+    height: 30px;
+}
+
+.placeholder div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: -55px;
+    background: no-repeat center 55%;
+}
+
+.placeholder div.self {
+    background-image: url(../img/delivery-showroom.png);
+}
+
+.placeholder div.courier {
+    background-image: url(../img/delivery-courier.png);
+}
+
+.placeholder div.russianpost {
+    background-image: url(../img/delivery-post.png);
+}
+
+#content .text {
+    padding-top: 10px;
+    font-size: 18px;
+    width: 100%;
+    color: #656565;
+    display: block;
+}
+
+.result_city {
+    line-height: 30px;
+    margin-top: 20px;
+    border: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: block;
+    color: #4795d3;
+    font-size: 12px; /* Приближение из-за подстановки шрифтов */
+    font-weight: 300;
+    padding-bottom: 2px;
+    cursor: pointer;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+.result_city *:not(span) {
+    padding-bottom: 4px;
+}
+
+.result_city span {
+
+    color: #c8c8c8;
+    font-size: 20px;
+    margin-right: 5px;
+    transition: 100ms all linear;
+}
+
+.result_city:hover span {
+    color: #4795d3;
+}
+
+.result_city span:before {
+    top: 3px;
+}
+
+.result_city:focus, .result_city:hover {
+    outline: none;
+    border: none !important;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+.text_form {
+    padding-top: 30px;
+}
+
+.text_form p {
+    color: #656565;
+    font-size: 14px;
+}
+
+.border-top {
+    margin-top: 20px;
+    border-top: 1px solid #6f6f6f;
+}
+
+.border-bottom {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #6f6f6f;
+}
+
+.text-level-2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+strong {
+    color: #4795d3;
+    font-size: 24px;
+}
+
+.colons {
+    overflow: hidden;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+#wrap {
+    min-height: 100%;
+    height: 100%;
+    margin: 0 auto -50px;
+}
+
+#push,
+footer {
+    height: 50px;
+}
+
+footer a {
+    background: #4795d3;
+    color: white;
+    line-height: 50px;
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: 174px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+    footer a {
+        display: none;
+    }
+
+    select,
+    textarea,
+    input {
+        font-size: 16px !important;
+    }
+
+    .close {
+        display: block;
+    }
+    .col-sm-4.item_block {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .item h2 {
+        height: auto;
+        margin-top: 11px;
+        font-size: 16px;
+    }
+
+    .text {
+        padding-top: 0;
+        font-size: 18px;
+    }
+
+    .colons {
+        padding-top: 0;
+        padding-bottom: 20px;
+    }
+
+    .colons div.item_block:first-child {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .item_block:first-of-type .delivery-method {
+        margin-top: 0;
+    }
+
+    .delivery-method strong {
+        font-size: 22px;
+    }
+
+    .delivery-method .item .glyphicon {
+        font-size: 20px;
+    }
+    .delivery-method .cost {
+        line-height: 50px;
+        padding-bottom: 5px;
+    }
+
+    .colons div.item_block:last-child {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .suggestion-element {
+        line-height: 35px;
+        font-size: 20px;
+        margin-left: 11px;
+    }
+
+    .delivery-description .text_form {
+        padding-top: 0;
+    }
+    #map, #map-showroom {
+        height: 85vh;
+    }
+
+}
+
+.suggestion-element {
+    cursor: pointer;
+}
+
+.container {
+    position: relative;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select,
+    textarea,
+    input {
+        font-size: 16px;
+    }
+}

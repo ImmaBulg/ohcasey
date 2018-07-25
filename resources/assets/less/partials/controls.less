@@ -1,0 +1,48 @@
+.btn {
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	color: #ffffff;
+	background-color: #000;
+	display: inline-block;
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+	text-transform: uppercase;
+	padding: 15px 34px;
+	font-family: @avenir;
+	-webkit-transition: color .3s, background-color .3s, transform .3s;
+	transition: color .3s, background-color .3s, transform .3s;
+	
+	&--sm {
+		font-size: 10px;
+		padding: 11px 26px;
+	}
+	
+	&:focus {
+		color: #fff;
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.btn {
+		&:hover {
+			color: #fff;
+			background-color: rgba(191,138,126, 1);
+		}
+		
+		&:active {
+			-webkit-transform: scale(0.98, 0.98);
+			transform: scale(0.98, 0.98);
+			box-shadow: none;
+		}
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.btn {
+		&:hover {
+			color: #fff;
+		}
+	}
+}

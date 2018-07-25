@@ -1,0 +1,79 @@
+// Constructor layout
+$ctl-icon-size: 26px;
+.constructor-layout {
+    padding: 4px;
+    margin: -4px;
+    position: absolute;
+    display: block;
+    transform-origin: 50% 50%;
+    z-index: 1000;
+    cursor: pointer;
+    outline: none;
+
+    .content {
+        visibility: hidden;
+        display: block;
+    }
+
+    .icon-move, .icon-rotate, .icon-resize, .icon-cross {
+        display: none;
+    }
+
+    &:hover {
+        border: 1px dotted #669ac4;
+        margin: -5px;
+    }
+
+    &.readonly:hover {
+        border: 0;
+        margin: -4px;
+        cursor: default;
+    }
+
+    &.active {
+        margin: -5px;
+        border: 1px solid #669ac4;
+
+        .icon-move, .icon-rotate, .icon-resize, .icon-cross {
+            display: block;
+            cursor: default;
+            position: absolute;
+            line-height: $ctl-icon-size;
+            text-align: center;
+            font-size: round($ctl-icon-size * 0.6);
+            width: $ctl-icon-size;
+            height: $ctl-icon-size;
+            color: #669ac4;
+            border: 1px solid #669ac4;
+            -webkit-border-radius: $ctl-icon-size / 2;
+            -moz-border-radius: $ctl-icon-size / 2;
+            border-radius: $ctl-icon-size / 2;
+            background-color: #fff;
+
+            &:hover, &.active {
+                background-color: #669ac4;
+                color: #FFF;
+            }
+        }
+
+        .icon-resize {
+            bottom: -$ctl-icon-size / 2;
+            right: -$ctl-icon-size / 2;
+        }
+
+        .icon-move {
+            top: -$ctl-icon-size / 2;
+            left: -$ctl-icon-size / 2;
+        }
+
+        .icon-rotate {
+            left: -$ctl-icon-size / 2;
+            bottom: -$ctl-icon-size / 2;
+        }
+
+        .icon-cross {
+            top: -$ctl-icon-size / 2;
+            right: -$ctl-icon-size / 2;
+        }
+    }
+}

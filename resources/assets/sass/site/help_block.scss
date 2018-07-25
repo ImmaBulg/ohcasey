@@ -1,0 +1,31 @@
+// Help block
+#help {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+
+    > div {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        > svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        #help-text {
+            .help-text-item {
+                position: absolute;
+                font-size: 30px;
+                color: white;
+                font-family: "Flow Ext", serif;
+                line-height: 40px;
+            }
+        }
+    }
+}

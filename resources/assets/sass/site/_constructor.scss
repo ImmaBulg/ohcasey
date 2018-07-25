@@ -1,0 +1,207 @@
+#constructor {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 70px;
+    bottom: 0;
+
+    .viewport {
+        position: absolute;
+        left: 0;
+        right: 365px;
+        top: 0;
+        bottom: 0;
+
+        .centerer {
+            height: 100%;
+            width: 100%;
+            display: table;
+            position: relative;
+
+            .wrapper {
+                display: table-cell;
+                height: 100%;
+                vertical-align: middle;
+                position: relative;
+                z-index: 10;
+
+                .ide {
+                    width: 670px;
+
+                    .helper-left {
+                        float: left;
+                        width: 200px;
+                        min-height: 10px;
+
+                        .helper-icon {
+                            span {
+                                float: right;
+                            }
+                        }
+
+                        .helper-content {
+                            .up-pointer {
+                                right: 10px;
+                                top: -20px;
+                            }
+                        }
+                    }
+
+                    .constructor {
+                        float: left;
+                        width: 250px;
+                        margin: 0 10px;
+                    }
+
+                    .helper-right {
+                        float: left;
+                        width: 200px;
+                        min-height: 10px;
+
+                        .helper-content {
+                            .up-pointer {
+                                left: 10px;
+                                top: -20px;
+                            }
+                        }
+                    }
+
+                    .helper-bottom {
+                        width: 250px;
+                        margin-left: 208px;
+                        margin-top: 10px;
+                        height: 70px;
+                    }
+                }
+            }
+        }
+    }
+
+    #control-panel {
+        width: 365px;
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        z-index: 100;
+        right: 0;
+    }
+
+    //#control-order {
+    //    position: absolute;
+    //    border-top: 2px dotted #669ac4;
+    //    width: 365px;
+    //    bottom: 0;
+    //    right: 0;
+    //    line-height: 30px;
+    //    padding: 10px 0;
+    //
+    //    > div {
+    //        display: block;
+    //        text-align: center;
+    //        font-size: 14px;
+    //
+    //        &:first-child {
+    //            border-right: 2px solid #669ac4;
+    //        }
+    //    }
+    //}
+
+    .case-cost {
+        background: #FFFFFF;
+        color: #9a9b9c;
+        font-size: 12px;
+        line-height: 20px;
+        position: relative;
+        padding: 5px 30px;
+        margin-right: 10px;
+
+        .up-pointer {
+            left: 50%;
+            margin-left: -10px;
+            top: -20px;
+        }
+
+        > strong {
+            display: block;
+            color: black;
+            font-size: 18px;
+            line-height: 30px;
+        }
+    }
+}
+
+@media (max-width: 1199px) {
+    #constructor {
+        .viewport {
+            right: 250px;
+            .centerer {
+                .wrapper {
+                    .ide {
+                        width: 490px;
+
+                        .helper-left {
+                            width: 130px;
+                            font-size: 10px;
+                            line-height: 12px;
+                        }
+
+                        .constructor {
+                            margin: 0 -10px;
+                        }
+
+                        .helper-right {
+                            width: 130px;
+                            font-size: 10px;
+                            line-height: 12px;
+                        }
+
+                        .helper-bottom {
+                            margin-left: 120px;
+                        }
+                    }
+                }
+            }
+        }
+
+        #control-panel {
+            width: 250px;
+        }
+
+        //#control-order {
+        //    width: 250px;
+        //}
+    }
+}
+
+
+.help-img-l-b {
+    -moz-transform: rotate(270deg) scaleX(-1);
+    -ms-transform: rotate(270deg) scaleX(-1);
+    -webkit-transform: rotate(270deg) scaleX(-1);
+    -o-transform: rotate(270deg) scaleX(-1);
+    transform: rotate(270deg) scaleX(-1);
+}
+
+.help-img-b-r {
+    -moz-transform: rotate(180deg) scaleX(-1);
+    -ms-transform: rotate(180deg) scaleX(-1);
+    -webkit-transform: rotate(180deg) scaleX(-1);
+    -o-transform: rotate(180deg) scaleX(-1);
+    transform: rotate(180deg) scaleX(-1);
+}
+
+.help-img-l-t {
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+.help-img-r-t {
+    -moz-transform: rotate(90deg) scaleX(-1);
+    -ms-transform: rotate(90deg) scaleX(-1);
+    -webkit-transform: rotate(90deg) scaleX(-1);
+    -o-transform: rotate(90deg) scaleX(-1);
+    transform: rotate(90deg) scaleX(-1);
+}

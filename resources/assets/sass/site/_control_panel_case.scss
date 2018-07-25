@@ -1,0 +1,61 @@
+.control-panel-case {
+    .case {
+        background-color: #f1f1f1;
+        padding: 10px;
+        overflow: hidden;
+        cursor: pointer;
+
+        .icon {
+            width: 130px;
+            float: left;
+        }
+
+        .description {
+            text-align: center;
+            margin-left: 140px;
+
+            .header {
+                color: #295e93;
+                font-size: 19px;
+                padding: 10px;
+            }
+
+            .description-1 {
+                color: #669ac4;
+                font-size: 14px;
+                padding: 5px;
+            }
+
+            .description-2 {
+                line-height: 1.3em;
+            }
+        }
+    }
+}
+
+.control-panel-case-color {
+    text-align: center;
+    .item {
+        display: inline-block;
+        margin-right: 10px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        border-radius: 15px;
+    }
+    .item:last-child {
+        margin-right: 0;
+    }
+}
+
+.help-case-1 {
+    right: 30px;
+    top: 20px;
+}
+
+.help-case-2 {
+    left: 50%;
+    top: 50%;
+    margin-top: 260px;
+    margin-left: -150px;
+}

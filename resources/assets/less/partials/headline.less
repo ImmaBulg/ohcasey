@@ -1,0 +1,32 @@
+.headline {
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 30px;
+    
+    &__info {
+    	font-size: 14px;
+    }
+    
+    .h1 {
+    	margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 991px) {
+	.headline {
+		display: block;
+	    
+	    &__info {
+	    	display: block;
+	    }
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.headline {
+		text-align: center;
+	}
+}

@@ -1,0 +1,48 @@
+.control-panel-font {
+    .font {
+        overflow: hidden;
+        text-align: center;
+        background-color: #f1f1f1;
+        padding: 10px 0;
+    }
+}
+
+.helper-font {
+    .font-color {
+        .color {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 7px;
+            margin-right: 3px;
+
+            &.active {
+                box-shadow: 0 0 0 3px #295e93 !important;
+            }
+            &:hover {
+                box-shadow: 0 0 0 3px #669ac4;
+            }
+        }
+    }
+
+    strong {
+        color: black;
+    }
+
+    .oh-button {
+        text-transform: uppercase;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+.help-font-1 {
+    right: 30px;
+    top: 65px;
+}
+
+.help-font-2 {
+    font-size: 20px;
+    top: 10px;
+    right: 30px;
+}

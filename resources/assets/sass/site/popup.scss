@@ -1,0 +1,179 @@
+.popup {
+    padding: 28px;
+    position: fixed;
+    align-self: center;
+    background-color: #fff;
+    z-index: 10000000000000;
+    top: 50%;
+    margin-top: -253px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s .3s ease, opacity .3s ease;
+    &.is-visible {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity .3s ease;
+    }
+    &__close {
+        position: absolute;
+        width: 33px;
+        height: 33px;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        transition: opacity .3s ease;
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 1px;
+            top: 16px;
+            background-color: rgba(26,26,26,1);
+        }
+        &::before {
+            left: 9px;
+            transform: rotate(45deg);
+        }
+        &::after {
+            right: 9px;
+            transform: rotate(-45deg);
+        }
+        &:hover {
+            opacity: .7;
+        }
+    }
+    &__bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-top: 1px solid #e4e4e4;
+        background-color: #fff;
+        padding: 30px;
+    }
+    .h2 {
+        margin: 0 0 20px;
+    }
+    &--cart {
+        width: 600px;
+        margin-top: -300px;
+        .h2 {
+            margin-bottom: 30px;
+        }
+        .cart-list__count {
+            color: rgba(26,26,26,1);
+            font-size: 14px;
+        }
+        .cart-list__body {
+            margin: 0 -30px;
+            max-height: 359px;
+            margin-bottom: 78px;
+        }
+        .cart-list__item {
+            display: table;
+            width: 100%;
+        }
+        .cart-list__head:nth-of-type(1),
+        .cart-list__img {
+            width: 96px;
+        }
+        .cart-list__head:nth-of-type(2),
+        .cart-list__desc {
+            width: 282px;
+        }
+        .cart-list__head:nth-of-type(3),
+        .cart-list__count {
+            width: 100px;
+        }
+        .cart-list__head:nth-of-type(4),
+        .cart-list__price {
+            width: 66px;
+        }
+        .mCSB_inside>.mCSB_container {
+            padding: 0 30px;
+            margin-right: 0;
+        }
+        .cart-list__count,
+        .cart-list__desc,
+        .cart-list__img,
+        .cart-list__price {
+            padding: 23px 0;
+        }
+        // .mCSB_draggerContainer {
+        //     right: 11px;
+        // }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .popup {
+        left: 50%;
+        margin-left: -328px;
+        &--cart {
+            margin-left: -300px;
+        }
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .popup {
+        top: 0;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        // z-index: 1000000;
+        left: 0;
+        .h2 {
+            display: none;
+        }
+        &__close {
+            background-color: #000;
+            top: 7px;
+            right: 9px;
+            &::before,
+            &::after {
+                background-color: #fff;
+            }
+        }
+        &__bottom {
+            padding: 20px;
+            .btn {
+                width: 100%;
+            }
+        }
+        &--cart {
+            padding: 20px;
+            .cart-list {
+                height: calc("100% - 138px");
+                display: block;
+            }
+            .cart-list__item--head,
+            .cart-list__count,
+            .cart-list__price {
+                display: none;
+            }
+            .cart-list__body {
+                max-height: none;
+                height: 100%;
+                margin-bottom: 0;
+            }
+            .h2 {
+                display: block;
+                font-size: 32px;
+            }
+            .mCSB_scrollTools .mCSB_dragger {
+                right: 10px;
+            }
+            .popup__close {
+                background-color: transparent;
+                &::after,
+                &::before {
+                    background-color: rgba(26,26,26,1);
+                }
+            }
+        }
+    }
+}

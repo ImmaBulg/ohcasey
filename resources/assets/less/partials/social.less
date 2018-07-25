@@ -1,0 +1,52 @@
+.social {
+	color: @defcol;
+	-webkit-transition: color .3s;
+	transition: color .3s;
+	
+	&__icon, &__title {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	
+	&__icon {
+		margin: 0 5px 0 0;
+		
+		.svg-icon {
+			fill: #000;
+			-webkit-transition: fill .3s;
+			transition: fill .3s;
+		}
+	}
+	
+	
+	
+	&--instagram {
+		.social__icon {
+			height: 23px;
+		}
+		
+		.svg-icon {
+			width: 23px;
+			height: 23px;
+		}
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.social {
+		&:hover {
+			color: @beige;
+			
+			.svg-icon {
+				fill: @beige;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.social {
+		display: block;
+		text-align: center;
+	}
+}

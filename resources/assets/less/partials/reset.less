@@ -1,0 +1,44 @@
+.reset {
+	text-align: center;
+	font-size: 14px;
+	display: block;
+	
+	&__icon {
+		display: inline-block;
+    	width: 23px;
+    	height: 23px;
+    	background-color: transparent;
+        -webkit-transition: opacity .3s ease;
+        transition: opacity .3s ease;
+        position: relative;
+        vertical-align: middle;
+        margin: -2px 4px 0 0;
+    	
+    	&::before, &::after {
+    		content: '';
+    		position: absolute;
+    		width: 15px;
+    		height: 1px;
+    		top: 11px;
+    		background-color: @defcol;
+    		
+    	}
+    	
+    	&::before {
+    		left: 4px;
+            -webkit-transform: rotate(45deg);
+    		transform: rotate(45deg);
+    	}
+    	
+    	&::after {
+    		right: 4px;
+            -webkit-transform: rotate(-45deg);
+    		transform: rotate(-45deg);
+    	}
+	}
+	
+	&__text {
+		display: inline-block;
+		vertical-align: middle;
+	}
+}

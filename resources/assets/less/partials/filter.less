@@ -1,0 +1,135 @@
+.filter {
+	margin-bottom: 40px;
+
+	&__select, &__colors {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	&__select {
+		font-size: 14px;
+		margin-right: 8px;
+
+		.select2-container {
+			width: 120px !important;
+		}
+
+		.select2-selection {
+			min-width: 120px;
+		}
+
+		.select2-selection__placeholder {
+			color: @defcol !important;
+		}
+	}
+
+	&__label {
+		display: inline-block;
+		vertical-align: middle;
+		line-height: 1;
+		font-size: 14px;
+	}
+
+	&__colors {
+		margin: 0 10px;
+
+		.filter__label {
+			margin-right: 10px;
+			margin-top: -5px;
+		}
+
+		.colors {
+			display: inline-block;
+			vertical-align: middle;
+			margin-top: -2px;
+		}
+	}
+
+	&__sort {
+		float: right;
+		font-size: 0;
+		margin-top: 8px;
+	}
+
+	&__sort-link {
+		display: inline-block;
+		margin-right: 20px;
+		position: relative;
+		color: @defcol;
+		font-size: 14px;
+		vertical-align: middle;
+
+		&:last-of-type {
+			margin-right: 0;
+			&:after {
+				content: none;
+			}
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			right: -11px;
+			width: 2px;
+			height: 2px;
+			background-color: @defcol;
+			border-radius: 50%;
+		}
+
+		&.is-active {
+			&:before {
+				content: '';
+				position: absolute;
+				bottom: -3px;
+				left: 0;
+				width: 100%;
+				height: 2px;
+				background-color: @beige;
+			}
+		}
+	}
+
+	&__btn {
+		display: none;
+		font-size: 14px;
+		font-weight: 400;
+		letter-spacing: normal;
+		background-color: #be8a7e;
+		color: #fff;
+		text-transform: none;
+		padding: 8px 19px;
+
+		&:hover {
+			color: #1a1a1a;
+		}
+	}
+
+	&__small-hidden {
+		display: inline-block;
+	}
+}
+
+.drop-filter {
+	min-width: 230px !important;
+}
+
+@media screen and (max-width: 767px) {
+	.filter {
+		&__small-hidden {
+			display: none;
+		}
+
+		&__btn {
+			display: inline-block;
+		}
+	}
+}
+
+@media screen and (max-width: 380px) {
+	.filter {
+		&__btn {
+		    padding: 8px 12px;
+		}
+	}
+}

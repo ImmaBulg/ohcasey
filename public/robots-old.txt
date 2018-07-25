@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: *index.php*
+Host: ohcasey.ru
+Sitemap: http://ohcasey.ru/sitemap.xml

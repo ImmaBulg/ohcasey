@@ -1,0 +1,27 @@
+.control-panel-device {
+    .device {
+        display: block;
+        width: 33%;
+        height: 120px;
+        background-color: #f1f1f1;
+        text-align: center;
+        padding: 4px;
+        float: left;
+
+        .title {
+            white-space: nowrap;
+            height: 20px;
+            padding-top: 5px;
+        }
+
+        .icon {
+            line-height: 90px;
+            vertical-align: middle;
+        }
+    }
+}
+
+.help-device-1 {
+    right: 30px;
+    top: 20px;
+}

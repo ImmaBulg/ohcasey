@@ -1,0 +1,109 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('/css/fonts/icomoon.eot?qfuenf');
+  src:  url('/css/fonts/icomoon.eot?qfuenf#iefix') format('embedded-opentype'),
+    url('/css/fonts/icomoon.ttf?qfuenf') format('truetype'),
+    url('/css/fonts/icomoon.woff?qfuenf') format('woff'),
+    url('/css/fonts/icomoon.svg?qfuenf#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+
+  display: inline-block;
+  font-feature-settings: normal;
+  font-kerning: auto;
+  font-language-override: normal;
+  font-size: inherit;
+  font-size-adjust: none;
+  font-stretch: normal;
+  font-style: normal;
+  font-synthesis: weight style;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  text-rendering: auto;
+  text-transform: none;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-3d:before {
+  content: "\e900";
+}
+.icon-arrow-right:before {
+  content: "\e901";
+}
+.icon-bg:before {
+  content: "\e902";
+}
+.icon-calculator:before {
+  content: "\e903";
+}
+.icon-cart:before {
+  content: "\e904";
+}
+.icon-clock:before {
+  content: "\e905";
+}
+.icon-cover:before {
+  content: "\e906";
+}
+.icon-cross:before {
+  content: "\e907";
+}
+.icon-cursor:before {
+  content: "\e908";
+}
+.icon-delivery:before {
+  content: "\e909";
+}
+.icon-device:before {
+  content: "\e90a";
+}
+.icon-info:before {
+  content: "\e90b";
+}
+.icon-instagram:before {
+  content: "\e90c";
+}
+.icon-move:before {
+  content: "\e90d";
+}
+.icon-phone:before {
+  content: "\e90e";
+}
+.icon-plus:before {
+  content: "\e90f";
+}
+.icon-position:before {
+  content: "\e910";
+}
+.icon-quality:before {
+  content: "\e911";
+}
+.icon-question:before {
+  content: "\e912";
+}
+.icon-resize:before {
+  content: "\e913";
+}
+.icon-rotate:before {
+  content: "\e914";
+}
+.icon-rouble:before {
+  content: "\e915";
+}
+.icon-smile:before {
+  content: "\e916";
+}
+.icon-text:before {
+  content: "\e917";
+}
+

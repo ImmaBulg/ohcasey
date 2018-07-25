@@ -1,0 +1,91 @@
+.spec-offer {
+	font-size: 0;
+	margin: 0 0 70px;
+	color: @defcol;
+	overflow: hidden;
+	
+	&__item {
+		width: 400px;
+		height: 400px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		text-align: center;
+		padding: 30px 0 40px;
+		display: inline-flex;
+		flex-flow: column wrap;
+		justify-content: space-between;
+    	margin: 0px -30px 0 0;
+    	vertical-align: top;
+    	position: relative;
+    	z-index: 100;
+    	
+    	&--second {
+    		margin-top: 30px;
+    		z-index: 90;
+    	}
+    	
+    	&--third {
+    		margin-top: 60px;
+    		z-index: 80;
+    	}
+	}
+	
+	&__desc {
+		color: @defcollight;
+		font-size: 16px;
+		margin: 0 0 10px;
+	}
+	
+	&__title {
+		font-size: 21px;
+  		font-weight: 700;
+  		text-transform: uppercase;
+	}
+	
+	.btn {
+		align-self: center;
+	}
+}
+
+@media screen and (max-width: 1199px) {
+	.spec-offer {
+		&__item {
+			width: 333px;
+			height: 333px;
+		}
+		
+		.btn {
+			font-size: 10px;
+			padding: 11px 26px;
+		}
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.spec-offer {
+		margin: 0 0 70px;
+		white-space: nowrap;
+		
+		&__item {
+			width: 352px;
+			height: 352px;
+			margin: 0 15px 0 0;
+			
+			&:last-of-type {
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.spec-offer {
+		&__item {
+			width: 257px;
+			height: 261px;
+			margin: 0 11px 0 0;
+			padding: 12px 0 30px;
+		}
+	}
+}

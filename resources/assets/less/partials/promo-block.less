@@ -1,0 +1,54 @@
+.promo-block {
+	margin-bottom: 80px;
+	text-align: center;
+	
+	.h1 {
+		margin-bottom: 25px;
+	}
+	
+	&__img {
+		margin-bottom: 30px;
+		
+		img {
+			max-width: 100%;
+		}
+	}
+	
+	&__text {
+		font-size: 18px;
+		max-width: 825px;
+		margin: 0 auto;	
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.promo-block {
+		margin-bottom: 50px;
+		
+		&__img {
+			margin-bottom: 20px;
+			
+			img {
+				max-width: 90%;
+			}
+		}
+		
+		.h1 {
+			margin-bottom: 20px;
+		}
+		
+		&__text {
+			font-size: 16px;
+		}
+	}
+}
+
+@media screen and (max-width: 530px) {
+	.promo-block {
+		&__img {
+			img {
+				max-width: 100%;
+			}
+		}
+	}
+}

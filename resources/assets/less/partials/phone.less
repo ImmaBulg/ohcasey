@@ -1,0 +1,27 @@
+.phone {
+	margin: 0 0 30px;
+	color: @defcol;
+	
+	&__title {
+		color: @defcollight;
+		font-size: 14px;
+	}
+	
+	&__num {
+		font-size: 26px;
+		font-weight: 600;
+		color: @defcol;
+		cursor: default;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.phone {
+		text-align: center;
+		margin: 0 0 10px;
+		
+		&__title {
+			margin: 0 0 10px;	
+		}
+	}
+}

@@ -110,8 +110,7 @@
                         <div class="panel-heading" id="cartSetCase">Товары</div>
                         <div class="panel-body">
                             @foreach ($order->cart->cartSetCase as $n => $item)
-                                <table class="table"
-                                       width="100%">
+                                <table width="100%">
                                     <tbody>
                                     <tr>
                                         <td style="width: 250px;">
@@ -181,6 +180,9 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                @if (count($order->cart->cartSetCase) - 1 !== $n || count($order->cart->cartSetCase) === 1)
+                                    <hr class="split-item">
+                                @endif
                             @endforeach
                             @foreach ($order->cart->cartSetProducts as $n => $item)
                                 <div class="row">
@@ -350,6 +352,9 @@
                                         </div>
                                     @endif
                                 </div>
+                                @if (count($order->cart->cartSetProducts) - 1 !== $n)
+                                    <hr class="split-item">
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -393,7 +398,7 @@
                             </div>
                         </div>
                         <div class="js-offer-container" style="display: none">
-                           <div class="row">
+                           {{--<div class="row">
                                 <div class="col-md-3">
                                     <label for="select_offer_id"><b>Предложение:</b></label>
                                 </div>
@@ -410,7 +415,7 @@
                                 <div class="col-md-6">
                                     <input type="text" name="count" id="count">
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="row">
                                 <div class="col-md-3">
                                 </div>

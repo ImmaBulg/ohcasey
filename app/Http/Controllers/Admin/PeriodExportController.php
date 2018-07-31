@@ -29,16 +29,15 @@ class PeriodExportController extends Controller
         $validator = Validator::make($request->except('_token'), [
             'startDate' => 'required',
         ], [
-            'startDate.required' => 'Заполните поле даты начала периода',
+            'startDate.required' => 'Заполните поле даты',
         ]);
         if($validator->fails()){
             return redirect()->route('admin.cdekForm')->withErrors($validator)->withInput();
         }
 
         $startDate = Carbon::createFromFormat('d-m-Y', $request['startDate'])->modify('midnight');
-        $lastOrder = Order::where('delivery_time_from', '<>', 'NULL')->orderBy('delivery_time_from', 'desc')->first();
-        $endDateStr = $lastOrder->delivery_time_from;
-        $endDate = Carbon::createFromFormat('Y-m-d H:i', $endDateStr)->modify('23:59');
+        $endDate = $startDate->modify('23:59');
+        $endDateStr = $endDate->format('Y-m-d 23:59');
 
 
         if ($endDate < $startDate)

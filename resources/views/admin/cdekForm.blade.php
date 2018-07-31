@@ -10,7 +10,7 @@
 		<form action="{{ route('admin.periodExport') }}" method="post" name="">
 			{{ csrf_field() }}
 			<div class="form-group">
-				<label for="startDate" class="form-control">Дата начала периода</label>
+				<label for="startDate" class="form-control">Дата</label>
 				<input type="text" class="js-startDate-datepicker form-control" name="startDate" id="startDate">
 			</div>
 			<div class="form-group">

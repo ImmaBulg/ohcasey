@@ -730,14 +730,16 @@ class OrderController extends Controller
         if ($order->cart) {
             if (true) {
 
+                $product = Product::find($request->input('product_id'));
+                //dump($product);
                 /** @var Offer $offer */
-                //$offer = Offer::findOrFail($request->get('offer_id'));
+                $offer = $product->offers()->first();
 
                 $cartHelper->put(
                     Ohcasey::SKU_PRODUCT,
                     1,
                     [],
-                    null,
+                    $offer->id,
                     $order->cart
                 );
 
@@ -746,7 +748,7 @@ class OrderController extends Controller
 
                 OrderLog::create([
                     'order_id'    => $order->order_id,
-                    'description' => 'Добавил товар ',
+                    'description' => 'Добавил товар ' . $offer->product->name,
                     'short_code'  => OrderLog::CUSTOM_CODE,
                 ]);
                 return redirect()->to(\URL::previous() . '#cartSetCase');

@@ -325,7 +325,6 @@ if (isset($order))
                                 <option  value="{{ $i }}">{{ ($i < 10) ? '0' . $i : $i }}</option>
                             @endif
                         @endfor
-                        <option value="59">59</option>
                     </select>
                 </div>
             </div>

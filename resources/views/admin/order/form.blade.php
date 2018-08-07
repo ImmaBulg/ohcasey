@@ -547,7 +547,7 @@
         </div>
     </div>
 
-    <button class="btn btn-default btn-primary" type="submit"><i class="fa fa-check"></i> Сохранить</button>
+    <button form="order-form" class="btn btn-default btn-primary" type="submit"><i class="fa fa-check"></i> Сохранить</button>
 
     <div style="clear:both;"></div>
 

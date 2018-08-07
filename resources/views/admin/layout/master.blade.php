@@ -19,6 +19,8 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ url('css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet">
+
 
     <!-- Font awesome -->
     <link href="{{ url('css/font-awesome.css') }}" rel="stylesheet">

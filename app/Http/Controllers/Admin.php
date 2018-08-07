@@ -826,7 +826,7 @@ class Admin extends Controller
         foreach ($cartSetProducts as $cartSetProduct) {
             $product = $cartSetProduct->offer->product;
             $order = $cartSetProduct->cart->order;
-            if (isset($product) &&  $order != null) {
+            if (isset($product) &&  $order != null && $cartSetProduct->print_status_id !== '69') {
                 if ($product->option_group_id == 9) {
                     $result[$i] = [
                         $order->order_id,

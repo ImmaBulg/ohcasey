@@ -1,11 +1,32 @@
 @extends('site.layouts.app')
 
-<?php 
-    $keywords = explode(', ', $category->keywords);
-    $str_breadcrumbs = 'ohcasey';
-    foreach($breadcrumbs as $b) {
-        $str_breadcrumbs = $str_breadcrumbs . ' ' . mb_strtolower($b['name']);
+<?php
+    if ($current_tags !== [])
+    {
+        $title = $current_tags->title;
+        $keywords = $current_tags->keywords;
+        $h1 = $current_tags->h1;
+        $description = $current_tags->desc;
+        $text_up = $current_tags->text_up;
+        $text_down = $current_tags->text_down;
+    } else if($current_options !== []) {
+        $title = ucfirst($current_options['device_name']) . ' ' . $current_options['color_name'] . ' ' . $category->title . ' ' . ucfirst($current_options['device_name']) . ' ' . lcfirst($current_options['case_name']);
+        $keywords = implode(' ' . lcfirst($current_options['device_name']) . ' ' . $current_options['color_name'] . ' ' . lcfirst($current_options['case_name']) . ', ', mb_split(', ', $category->keywords)) . ' ' . lcfirst($current_options['device_name']) . ' ' . $current_options['color_name'] . ' ' . lcfirst($current_options['case_name']);
+        $h1 = ucfirst($current_options['device_name']) . ' ' . $category->h1 . ' - ' . $current_options['color_name'] . ' ' . $current_options['device_name'] . '(' . $current_options['case_name'] . ')';
+        $description = $category->description;
     }
+    else {
+        $title = $category->title;
+        $keywords = $category->keywords;
+        $description = $category->description;
+        $h1 = $category->h1;
+    }
+$str_breadcrumbs = 'ohcasey';
+foreach($breadcrumbs as $b) {
+    $str_breadcrumbs = $str_breadcrumbs . ' ' . mb_strtolower($b['name']);
+}
+    /*$keywords = explode(', ', $category->keywords);
+
 
     if (count($keywords) > 1) {
         $title = mb_substr(mb_strtoupper($keywords[1]), 0, 1) . mb_substr($keywords[1], 1);
@@ -45,15 +66,14 @@
                 $description = $category->h1 . ' ' . $str_breadcrumbs . '. Ohcasey - ультрамодные чехлы! Доставка по всей России. ✆ +7 (965) 396-97-85';
                 break;
         }
-    }  
+    }  */
 ?>
 
-@section('title', $category->title)
-@section('keywords', $category->keywords)
-@section('description', $category->description)
+@section('title', $title)
+@section('keywords', $keywords)
+@section('description', $description)
 
 @section('content')
-	
     <div class="inner @if($category->banner_image) inner--banner-top @endif">
         @if($category->banner_image)
         <div class="banner banner--top" style="background-image: url('{{ $category->banner_image }}')">
@@ -67,13 +87,12 @@
         @endif
 
         <div class="container" id="app">
-
             @if(!$category->banner_image)
             <div class="headline">
-				@if($category->h1 == "")
+				@if($h1 == "")
 					<h1 class="h1">{{$category->title}}</h1>
 				@else
-					<h1 class="h1">{{$category->h1}}</h1>
+					<h1 class="h1">{{$h1}}</h1>
 				@endif
             </div>
             @endif
@@ -106,7 +125,7 @@
                                 </div>
                             </div>
 
-                            <div class="filter__select">
+                            <div class="filter__select" v-if="$route.query['device'] != 'iphone' && $route.query['device'] != 'samsung'">
                                 <div class="select">
                                     <select class="js-select-item-case" data-placeholder="Материал">
                                         <option v-for="v in cases" :value="v.case" :title="setCaseTitle(v.caption)">@{{v.caption}}</option>
@@ -114,7 +133,7 @@
                                 </div>
                             </div>
 
-                            <div class="filter__colors">
+                            <div class="filter__colors" v-if="$route.query['device'] != 'iphone' && $route.query['device'] != 'samsung'">
                                 <div class="filter__label">Цвет</div>
                                 <ul class="colors">
                                     <li class="colors__item" v-for="(v, index) in selectedPalette" @click="selectedColorIndex = index; selectColor(v, index)">
@@ -140,11 +159,8 @@
                     <div class="loader" v-show="isLoading" v-cloak></div>
 
                     <div class="catalog catalog--inner @if($category->large_photos) catalog--collection js-collection @endif" v-show="!isLoading" v-cloak>
-                        @if($category->text_top)
-                            <div class="text">
-                                {!! $category->text_top !!}
-                            </div>
-                        @endif
+                        <div class="text text_top" id="text_up">
+                        </div>
                         <div class="catalog--category">
                             @foreach ($children as $child)
                                 @if ($category->id == $child->id && !empty($child))
@@ -201,12 +217,8 @@
                     </ul>
 
 
-                    @if($category->text_bottom)
-                        <div class="text">
-                            {!! $category->text_bottom !!}
-                        </div>
-                    @endif
-
+                    <div class="tex text_down" id="text_down">
+                    </div>
                 </div>
             </div>
 
@@ -220,14 +232,14 @@
                             </select>
                         </div>
                     </div>
-                    <div class="filter__select">
+                    <div class="filter__select" v-if="$route.query['device'] != 'iphone' && $route.query['device'] != 'samsung'">
                         <div class="select">
                             <select class="js-select-item-case-modal" data-placeholder="Материал">
                                 <option v-for="v in cases" :value="v.case">@{{v.caption}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="filter__colors">
+                    <div class="filter__colors" v-if="$route.query['device'] != 'iphone' && $route.query['device'] != 'samsung'">
                         <div class="filter__label">Цвет</div>
                         <ul class="colors">
                             <li class="colors__item" v-for="(v, index) in selectedPalette" @click="selectedColorIndex = index; selectColor(v, index)">
@@ -252,6 +264,7 @@
         window.colors = {!! json_encode($colors) !!}
         window.cases = {!! json_encode($cases) !!}
         window.options = {!! json_encode($options) !!}
+        window.tags = {!! json_encode($tags) !!}
     </script>
     <script src="/js/frontcommons.js"></script>
     <script src="{{url('js/collection.js')}}"></script>

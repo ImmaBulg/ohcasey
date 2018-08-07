@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CatMeta;
+use App\Models\Shop\OptionValue;
 use Illuminate\Http\Request;
 use App\Models\Shop\Category;
 use Intervention\Image\ImageManager;
@@ -38,7 +40,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-    	return view('admin.category.create');
+        $models = OptionValue::where(['option_id' => 1])->orderBy('order', 'asc')->get();
+    	return view('admin.category.create', ['models' => $models]);
     }
 
     /**
@@ -49,7 +52,14 @@ class CategoryController extends Controller
     public function edit($id)
     {
     	$category = Category::findOrFail($id);
-    	return view('admin.category.edit')->with(compact('category'));
+        $models = OptionValue::where(['option_id' => 1])->orderBy('order', 'asc')->get();
+        $tmp = CatMeta::where([
+            'cat_id' => $id
+        ])->get();
+        $tags = [];
+        foreach ($tmp as $t)
+            $tags[$t->phone] = $t;
+        return view('admin.category.edit')->with(compact('category', 'models', 'tags'));
     }
 
     /**
@@ -147,6 +157,41 @@ class CategoryController extends Controller
     public function categoriesList()
     {
         return response()->json(Category::pathList()->get());
+    }
+
+    public function updateMeta(Request $request)
+    {
+        $inputs = $request->all();
+        $cat_meta = CatMeta::where([
+            'cat_id' => $inputs['cat'],
+            'phone' => $inputs['model'],
+        ])->first();
+        //dump($request);
+        \DB::transaction(function() use (&$cat_meta, $inputs) {
+            if ($cat_meta) {
+                $cat_meta->h1 = $inputs['meta_h1'];
+                $cat_meta->title = $inputs['meta_title'];
+                $cat_meta->desc = $inputs['meta_desc'];
+                $cat_meta->keywords = $inputs['meta_keywords'];
+                $cat_meta->text_up = $inputs['text_up'];
+                $cat_meta->text_down = $inputs['text_down'];
+                $cat_meta->save();
+            }
+            else {
+                $cat_meta = new CatMeta();
+                $cat_meta->cat_id = $inputs['cat'];
+                $cat_meta->phone = $inputs['model'];
+                $cat_meta->h1 = $inputs['meta_h1'];
+                $cat_meta->title = $inputs['meta_title'];
+                $cat_meta->desc = $inputs['meta_desc'];
+                $cat_meta->keywords = $inputs['meta_keywords'];
+                $cat_meta->text_up = $inputs['text_up'];
+                $cat_meta->text_down = $inputs['text_down'];
+                $cat_meta->save();
+            }
+        });
+
+        return ['answer' => 'success'];
     }
 
 }

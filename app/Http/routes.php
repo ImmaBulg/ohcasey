@@ -210,6 +210,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
 		Route::post('/cdek/form', ['uses' => 'CdekController@execute', 'as' => 'admin.execute']);
 		Route::post('/courier-export', ['uses' => 'CourierExportController@execute', 'as' => 'admin.courierExport']);
         Route::post('/period-export', ['uses' => 'PeriodExportController@execute', 'as' => 'admin.periodExport']);
+        Route::post('/period-cdek-export', ['uses' => 'PeriodExportController@executeOnlyCdek', 'as' => 'admin.periodCdekExport']);
         Route::group(['middleware' => 'userrole'], function () {
             Route::get('/users', 'UserController@index')->name('admin.users');
             Route::get('/users/{user}/remove', 'UserController@delete')->name('admin.users.delete');
@@ -295,6 +296,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
         });
 
         Route::resource('category', 'CategoryController', ['except' => ['show']]);
+        Route::post('/category/ajax_meta_update', ['uses' => 'CategoryController@updateMeta']);
     });
 });
 
@@ -420,7 +422,6 @@ Route::group(['prefix' => 'api'], function (){
     // })->name('shop.delivery');
 
     Route::get('/{slug}', function($slug) {
-
         $page = \App\Models\Shop\Page::whereSlug($slug)->first();
         if(!empty($page)){
             $controller = app()->make('\App\Http\Controllers\PageController');
@@ -435,6 +436,7 @@ Route::group(['prefix' => 'api'], function (){
 
         $controller = app()->make('\App\Http\Controllers\CategoryController');
         return $controller->callAction('show', [$slug]);
+
     })->where('slug', '(.*)?')->name('shop.slug');
 
     // Route::get('/{pageSlug}', 'PageController@show')->name('page.category');

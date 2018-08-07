@@ -220,16 +220,18 @@ class ProductController extends Controller
                 $deviceColor = ProductImageMaker::ONLY_ONE_COLOR;
             } else {
                 /** @var Device $device */
+                if ($deviceName === 'iphone') $deviceName = 'iphonex';
+                if ($deviceName === 'samsung') $deviceName = 'sgs7e';
                 $device = Device::where('device_name', $deviceName)->firstOrFail();
                 $deviceColor = $device->device_colors[$deviceColorIndex];
             }
-
             $image = $maker->make($bgName, $deviceName, $caseFileName, $deviceColorIndex, $deviceColor);
             return $image->__toString();
         });
 
         header('Content-Type: image/png');
         header('Cache-Control: max-age=31556926');
+
         echo $imageBinary;
     }
 
@@ -300,17 +302,17 @@ class ProductController extends Controller
             });
 
         //echo $count;
-		
+
         return response()
             ->view('site.shop.sitemap', compact('links'), 200)
             ->header('Content-Type', 'text/xm');
     }  */
-	
+
 	public function sitemap()
     {
         $links = [];
         $count = 0;
-		
+
 		// статические страницы
 		Page::query()
 			->each(function ($pages) use (&$links, &$count) {

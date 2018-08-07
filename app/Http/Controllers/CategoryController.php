@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CatMeta;
 use App\Models\Shop\Category;
 use App\Models\Shop\Product;
 use App\Models\Shop\Option;
@@ -86,15 +87,35 @@ class CategoryController extends Controller
 
         if ($categoryParent) {
             if ($categoryParent->name !== 'Каталог')
-                array_push($breadcrumbs, ['href' => $categoryParent->url, 'name' => $categoryParent->name]);
+                $breadcrumbs[] = ['href' => $categoryParent->url, 'name' => $categoryParent->name];
         }
 
-        array_push($breadcrumbs, ['name' => $category->name]);
+        $breadcrumbs[] = ['name' => $category->name];
+
+        $tmp = CatMeta::where([
+            'cat_id' => $category->id,
+        ])->get();
+        $tags = [];
+        $current_tags = [];
+        $current_options = [];
+        foreach ($tmp as $t) {
+            $tags[$t->phone] = $t;
+            if ($t->phone === $params['device']) {
+                $current_tags = $t;
+            }
+        }
+        if ($params['device'] != '') {
+            $current_options['device_name'] = $devices->filter(function($item) use ($params) { return $item->value === $params['device']; })->first()->title;
+            $current_options['color_name'] = $colors->filter(function($item, $index) use ($params) { return $index === $params['device']; })->first()[$params['color']];
+            $case = array_filter($cases[$params['device']], function ($item) use ($params) { return $item->case === $params['case']; });
+            $current_options['case_name'] = $case ? array_shift($case)->caption : '';
+        }
+
 
         if (count($category->selfChildren) > 0 && $category->catalog_display_type == true) {
             return view('site.category.show-categories', compact('category', 'breadcrumbs', 'children', 'products'));
         } else {
-            return view('site.category.show', compact('category', 'breadcrumbs', 'children', 'products', 'devices', 'colors', 'cases', 'params', 'options'));
+            return view('site.category.show', compact('category', 'breadcrumbs', 'children', 'products', 'devices', 'colors', 'cases', 'params', 'options', 'tags', 'current_tags', 'current_options'));
         }
 
     }

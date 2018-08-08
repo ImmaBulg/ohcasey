@@ -176,6 +176,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::get('cart', "Admin@cart");
     Route::get('cart/img/{id}', "Admin@cartImg");
     Route::get('get_csv', 'Admin@getCsv')->name('admin.get_csv');
+    Route::get('get_back_csv', 'Admin@getBackCsv')->name('admin.get_back_csv');
+
 
     Route::group(['middleware' => 'userrole'], function () {
         Route::get('dashboards', 'Admin@dashboards')->name('admin.dashboards');
@@ -244,6 +246,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
             Route::post('ajax_edit_item_cost',                           'OrderController@ajaxEditItemCost');
             Route::post('ajax_edit_delivery_cost',                       'OrderController@ajaxEditDeliveryCost');
             Route::post('ajax_edit_item_count',                          'OrderController@ajaxEditItemCount');
+            Route::post('ajax_case_update_print_info',                   'OrderController@ajaxCaseUpdatePrintInfo');
             Route::get('{order}/cartSetCase/{cartSetCase}/remove',       'OrderController@removeCartSetCase')->name('admin.order.cart_set_case.remove');
             Route::get('{order}/cartSetProduct/{cartSetProduct}/remove', 'OrderController@removeCartSetProduct')->name('admin.order.cart_set_product.remove');
             Route::get('{order}/cartSetCase/{cartSetCase}/edit',         'OrderController@cartSetCaseEdit')->name('admin.order.cart_set_case.edit');

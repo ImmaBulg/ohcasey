@@ -809,6 +809,7 @@ class Admin extends Controller
         );
 
         $cartSetProducts = CartSetProduct::whereBetween('date_send', [$request['startDate'], $request['endDate']])->get();
+        $cartSetCases = CartSetCase::whereBetween('date_send', [$request['startDate'], $request['endDate']])->get();
         $result[0] = [
             'Заказ',
             'ID продукта в заказе',
@@ -826,23 +827,40 @@ class Admin extends Controller
         foreach ($cartSetProducts as $cartSetProduct) {
             $product = $cartSetProduct->offer->product;
             $order = $cartSetProduct->cart->order;
-            if (isset($product) &&  $order != null && $cartSetProduct->print_status_id !== '69') {
-                if ($product->option_group_id == 9) {
-                    $result[$i] = [
-                        $order->order_id,
-                        $cartSetProduct->id,
-                        $product->name,
-                        isset($cartSetProduct->offer) ? $cartSetProduct->offer->optionValues[0]->title : '',
-                        ($cartSetProduct->size) ? OptionValue::where(['id' => $cartSetProduct->size])->pluck('title')[0] : 'Не задана',
-                        $cartSetProduct->item_count,
-                        ($cartSetProduct->print) ? OptionValue::where(['id' => $cartSetProduct->print])->pluck('title')[0] : 'Не задан',
-                        ($cartSetProduct->print_status_id) ? OptionValue::where(['id' => $cartSetProduct->print_status_id])->pluck('title')[0] : 'Не задан',
-                        ($cartSetProduct->date_send) ? $cartSetProduct->date_send : 'Не задана',
-                        ($cartSetProduct->supposed_date) ? $cartSetProduct->supposed_date : 'Не задана',
-                        ($cartSetProduct->date_back) ? $cartSetProduct->date_back : 'Не задана',
-                    ];
-                }
+            if (isset($product) &&  $order != null && $cartSetProduct->print_status_id !== '69' && $cartSetProduct->print_status_id !== '75') {
+                $result[$i] = [
+                    $order->order_id,
+                    $cartSetProduct->id,
+                    $product->name,
+                    isset($cartSetProduct->offer) ? $cartSetProduct->offer->optionValues[0]->title : '',
+                    ($cartSetProduct->size) ? OptionValue::where(['id' => $cartSetProduct->size])->pluck('title')[0] : 'Не задана',
+                    $cartSetProduct->item_count,
+                    ($cartSetProduct->print) ? OptionValue::where(['id' => $cartSetProduct->print])->pluck('title')[0] : 'Не задан',
+                    ($cartSetProduct->print_status_id) ? OptionValue::where(['id' => $cartSetProduct->print_status_id])->pluck('title')[0] : 'Не задан',
+                    ($cartSetProduct->date_send) ? $cartSetProduct->date_send : 'Не задана',
+                    ($cartSetProduct->supposed_date) ? $cartSetProduct->supposed_date : 'Не задана',
+                    ($cartSetProduct->date_back) ? $cartSetProduct->date_back : 'Не задана',
+                ];
+                $i++;
+            }
+        }
 
+        foreach ($cartSetCases as $cartSetCase) {
+            $order = $cartSetCase->cart->order;
+            if ($cartSetCase->print_status_id !== '69' && $cartSetCase->print_status_id !== '75') {
+                $result[$i] = [
+                    $order->order_id,
+                    $cartSetCase->cart_set_id,
+                    $cartSetCase->casey->case_caption . ' чехол на ' . $cartSetCase->device->device_caption,
+                    '',
+                    'Не задана',
+                    $cartSetCase->item_count,
+                    'Не задан',
+                    ($cartSetCase->print_status_id) ? OptionValue::where(['id' => $cartSetCase->print_status_id])->pluck('title')[0] : 'Не задан',
+                    ($cartSetCase->date_send) ? $cartSetCase->date_send : 'Не задана',
+                    ($cartSetCase->supposed_date) ? $cartSetCase->supposed_date : 'Не задана',
+                    ($cartSetCase->date_back) ? $cartSetCase->date_back : 'Не задана',
+                ];
                 $i++;
             }
         }
@@ -864,6 +882,98 @@ class Admin extends Controller
 
         return response()->stream($callback, 200, $headers);
     }
+
+    public function getBackCsv(Request $request)
+    {
+        $startDate = Carbon::createFromFormat('Y-m-d', $request['startDate']);
+        $endDate = Carbon::createFromFormat('Y-m-d', $request['endDate']);
+        $result = [];
+        /**/
+
+        $headers = array(
+            "Content-type" => "text/csv; charset=windows-1251",
+            "Content-Disposition" => "attachment; filename=" . $startDate->format('d_m_Y') . '-' . $endDate->format('d_m_Y') . ".csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        );
+
+        $cartSetProducts = CartSetProduct::whereBetween('date_send', [$request['startDate'], $request['endDate']])->get();
+        $cartSetCases = CartSetCase::whereBetween('date_send', [$request['startDate'], $request['endDate']])->get();
+        $result[0] = [
+            'Заказ',
+            'ID продукта в заказе',
+            'Дизайн футболки',
+            'Тип футболки',
+            'Размер',
+            'Количество',
+            'Тип нанесения',
+            'Статус заказа в печать',
+            'Дата отправки в печать',
+            'Предполагаемая дата забора',
+            'Дата забора из печати',
+        ];
+        $i = 1;
+        foreach ($cartSetProducts as $cartSetProduct) {
+            $product = $cartSetProduct->offer->product;
+            $order = $cartSetProduct->cart->order;
+            if (isset($product) &&  $order != null && $cartSetProduct->print_status_id === '70') {
+                $result[$i] = [
+                    $order->order_id,
+                    $cartSetProduct->id,
+                    $product->name,
+                    isset($cartSetProduct->offer) ? $cartSetProduct->offer->optionValues[0]->title : '',
+                    ($cartSetProduct->size) ? OptionValue::where(['id' => $cartSetProduct->size])->pluck('title')[0] : 'Не задана',
+                    $cartSetProduct->item_count,
+                    ($cartSetProduct->print) ? OptionValue::where(['id' => $cartSetProduct->print])->pluck('title')[0] : 'Не задан',
+                    ($cartSetProduct->print_status_id) ? OptionValue::where(['id' => $cartSetProduct->print_status_id])->pluck('title')[0] : 'Не задан',
+                    ($cartSetProduct->date_send) ? $cartSetProduct->date_send : 'Не задана',
+                    ($cartSetProduct->supposed_date) ? $cartSetProduct->supposed_date : 'Не задана',
+                    ($cartSetProduct->date_back) ? $cartSetProduct->date_back : 'Не задана',
+                ];
+                $i++;
+            }
+        }
+
+        foreach ($cartSetCases as $cartSetCase) {
+            $order = $cartSetCase->cart->order;
+            if ($cartSetCase->print_status_id === '70') {
+                $result[$i] = [
+                    $order->order_id,
+                    $cartSetCase->cart_set_id,
+                    $cartSetCase->casey->case_caption . ' чехол на ' . $cartSetCase->device->device_caption,
+                    '',
+                    'Не задана',
+                    $cartSetCase->item_count,
+                    'Не задан',
+                    ($cartSetCase->print_status_id) ? OptionValue::where(['id' => $cartSetCase->print_status_id])->pluck('title')[0] : 'Не задан',
+                    ($cartSetCase->date_send) ? $cartSetCase->date_send : 'Не задана',
+                    ($cartSetCase->supposed_date) ? $cartSetCase->supposed_date : 'Не задана',
+                    ($cartSetCase->date_back) ? $cartSetCase->date_back : 'Не задана',
+                ];
+                $i++;
+            }
+
+        }
+
+        $callback = function() use ($result)
+        {
+            //$FH = fopen('php://output', 'w');
+            $str = '';
+            foreach ($result as $i => $row) {
+                foreach ($row as $r)
+                    $str .= $r . ";";
+                $str .= "\r\n";
+                //fputcsv($FH, $row, ';');
+            }
+            $str = iconv("UTF-8", "WINDOWS-1251//IGNORE",  $str);
+            file_put_contents('php://output', $str);
+            //fclose($FH);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
 
     public function csvQuery($startDate, $endDate)
     {

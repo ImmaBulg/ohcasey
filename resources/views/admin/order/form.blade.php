@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="row" style="margin-top: 25px;">
-            <div class="col-md-1 col-xs-1">
+            <div class="col-md-3 col-xs-3">
                 Статус заказа
             </div>
             <div class="col-md-4 col-xs-4 order-status-admin">
@@ -177,6 +177,47 @@
                                             </div>
 
                                         </td>
+                                        <td>
+                                            <div class="panel panel-primary" data-itemid="{{ $item->cart_set_id }}" data-orderid="{{ $order->order_id }}" data-type="case">
+                                                <div class="panel-heading">Печать</div>
+                                                <div class="panel-body">
+                                                    <div class="form-group name">
+                                                        <label for="date-send" class="date-send control-label">
+                                                            Дата отправки в печать
+                                                        </label>
+                                                        <input id="date-send" type="text" class="string form-control js-date-send-picker" value="{{ $item->date_send }}">
+                                                    </div>
+                                                    <div class="form-group name">
+                                                        <label for="supposed-date-back" class="supposed-date-back control-label">
+                                                            Предполагаемая дата забора
+                                                        </label>
+                                                        <input type="text" id="supposed-date-back"
+                                                               class="string form-control js-supposed-date-picker" value="{{ $item->date_supposed }}">
+                                                    </div>
+                                                    <div class="form-group name">
+                                                        <label for="date-back" class="date-back control-label">
+                                                            Дата забора из печати
+                                                        </label>
+                                                        <input type="text" id="date-back" class="string form-control js-date-back-picker" value="{{ $item->date_back }}">
+                                                    </div>
+                                                    <div class="form-group name">
+                                                        <label for="print-status" class="print-status control-label">
+                                                            Статус печати
+                                                        </label> <br>
+                                                        <select name="print-status" id="print-status" class="js-print-status-select" style="width: 100%;">
+                                                            <option value="" disabled selected>Статус печати</option>
+                                                            @foreach ($print_statuses as $print_status)
+                                                                @if ($print_status->id == $item->print_status_id)
+                                                                    <option selected value="{{ $print_status->id }}">{{ $print_status->title }}</option>
+                                                                @else
+                                                                    <option value="{{ $print_status->id }}">{{ $print_status->title }}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -308,49 +349,47 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if ($item->offer->product->option_group_id == 9)
-                                        <div class="col-lg-3" style="padding-top: 2px">
-                                            <div class="panel panel-info" data-itemid="{{ $item->id }}" data-orderid="{{ $order->order_id }}">
-                                                <div class="panel-heading">Печать</div>
-                                                <div class="panel-body">
-                                                    <div class="form-group name">
-                                                        <label for="date-send" class="date-send control-label">
-                                                            Дата отправки в печать
-                                                        </label>
-                                                        <input id="date-send" type="text" class="string form-control js-date-send-picker" value="{{ $item->date_send }}">
-                                                    </div>
-                                                    <div class="form-group name">
-                                                        <label for="supposed-date-back" class="supposed-date-back control-label">
-                                                            Предполагаемая дата забора
-                                                        </label>
-                                                        <input type="text" id="supposed-date-back"
-                                                               class="string form-control js-supposed-date-picker" value="{{ $item->supposed_date }}">
-                                                    </div>
-                                                    <div class="form-group name">
-                                                        <label for="date-back" class="date-back control-label">
-                                                            Дата забора из печати
-                                                        </label>
-                                                        <input type="text" id="date-back" class="string form-control js-date-back-picker" value="{{ $item->date_back }}">
-                                                    </div>
-                                                    <div class="form-group name">
-                                                        <label for="print-status" class="print-status control-label">
-                                                            Статус печати
-                                                        </label> <br>
-                                                        <select name="print-status" id="print-status" class="js-print-status-select" style="width: 100%;">
-                                                            <option value="" disabled selected>Статус печати</option>
-                                                            @foreach ($print_statuses as $print_status)
-                                                                @if ($print_status->id == $item->print_status_id)
-                                                                    <option selected value="{{ $print_status->id }}">{{ $print_status->title }}</option>
-                                                                @else
-                                                                    <option value="{{ $print_status->id }}">{{ $print_status->title }}</option>
-                                                                @endif
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
+                                    <div class="col-lg-3" style="padding-top: 2px">
+                                        <div class="panel panel-primary" data-itemid="{{ $item->id }}" data-orderid="{{ $order->order_id }}">
+                                            <div class="panel-heading">Печать</div>
+                                            <div class="panel-body">
+                                                <div class="form-group name">
+                                                    <label for="date-send" class="date-send control-label">
+                                                        Дата отправки в печать
+                                                    </label>
+                                                    <input id="date-send" type="text" class="string form-control js-date-send-picker" value="{{ $item->date_send }}">
+                                                </div>
+                                                <div class="form-group name">
+                                                    <label for="supposed-date-back" class="supposed-date-back control-label">
+                                                        Предполагаемая дата забора
+                                                    </label>
+                                                    <input type="text" id="supposed-date-back"
+                                                           class="string form-control js-supposed-date-picker" value="{{ $item->supposed_date }}">
+                                                </div>
+                                                <div class="form-group name">
+                                                    <label for="date-back" class="date-back control-label">
+                                                        Дата забора из печати
+                                                    </label>
+                                                    <input type="text" id="date-back" class="string form-control js-date-back-picker" value="{{ $item->date_back }}">
+                                                </div>
+                                                <div class="form-group name">
+                                                    <label for="print-status" class="print-status control-label">
+                                                        Статус печати
+                                                    </label> <br>
+                                                    <select name="print-status" id="print-status" class="js-print-status-select" style="width: 100%;">
+                                                        <option value="" disabled selected>Статус печати</option>
+                                                        @foreach ($print_statuses as $print_status)
+                                                            @if ($print_status->id == $item->print_status_id)
+                                                                <option selected value="{{ $print_status->id }}">{{ $print_status->title }}</option>
+                                                            @else
+                                                                <option value="{{ $print_status->id }}">{{ $print_status->title }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
+                                    </div>
                                 </div>
                                 @if (count($order->cart->cartSetProducts) - 1 !== $n)
                                     <hr class="split-item">

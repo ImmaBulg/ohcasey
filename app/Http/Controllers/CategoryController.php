@@ -105,9 +105,14 @@ class CategoryController extends Controller
             }
         }
         if ($params['device'] != '') {
+            if ($params['device'] === 'iphone')
+                $case = array_filter($cases['iphonex'], function ($item) use ($params) { return $item->case === $params['case']; });
+            else if ($params['device'] === 'samsung')
+                $case = array_filter($cases['sgs7e'], function ($item) use ($params) { return $item->case === $params['case']; });
+            else
+                $case = array_filter($cases[$params['device']], function ($item) use ($params) { return $item->case === $params['case']; });
             $current_options['device_name'] = $devices->filter(function($item) use ($params) { return $item->value === $params['device']; })->first()->title;
             $current_options['color_name'] = $colors->filter(function($item, $index) use ($params) { return $index === $params['device']; })->first()[$params['color']];
-            $case = array_filter($cases[$params['device']], function ($item) use ($params) { return $item->case === $params['case']; });
             $current_options['case_name'] = $case ? array_shift($case)->caption : '';
         }
 

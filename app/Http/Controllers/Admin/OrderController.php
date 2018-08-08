@@ -548,6 +548,44 @@ class OrderController extends Controller
         return ['answer' => 'success'];
     }
 
+    public function ajaxCaseUpdatePrintInfo(Request $request)
+    {
+        $cartSetCase = CartSetCase::find(['cart_set_id' => $request->input('cartSetCase')])->first();
+
+        \DB::transaction(function () use ($request, &$cartSetCase) {
+            $description = '';
+
+            switch($request['variable'])
+            {
+                case 'date-send':
+                    $cartSetCase->date_send = $request->input('date');
+                    $description = 'Обновил дату отправки на печать товара ' .  strtolower($cartSetCase->casey->case_caption) . ' чехол на ' . $cartSetCase->device->device_caption;
+                    break;
+                case 'supposed-date':
+                    $cartSetCase->date_supposed = $request['date'];
+                    $description = 'Обновил предполагаемую дату забора товара ' .  strtolower($cartSetCase->casey->case_caption) . ' чехол на ' . $cartSetCase->device->device_caption;
+                    break;
+                case 'date-back':
+                    $cartSetCase->date_back = $request['date'];
+                    $description = 'Обновил дату забора из печати товара "' .  strtolower($cartSetCase->casey->case_caption) . ' чехол на ' . $cartSetCase->device->device_caption;
+                    break;
+                case 'print-status':
+                    $cartSetCase->print_status_id = $request['selectId'];
+                    $description = 'Обновил статус печати товара "' .  strtolower($cartSetCase->casey->case_caption) . ' чехол на ' . $cartSetCase->device->device_caption;
+                    break;
+            }
+            $cartSetCase->save();
+
+            OrderLog::create([
+                'order_id'    => intval($request['orderId']),
+                'description' => $description,
+                'short_code'  => OrderLog::CUSTOM_CODE,
+            ]);
+        });
+
+        return ['answer' => 'success'];
+    }
+
     public function ajaxEditItemCost(Request $request)
     {
         $id = $request->input('id');

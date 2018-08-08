@@ -15,7 +15,7 @@ use App\Models\Shop\Product;
 class CartSetCase extends CartSet
 {
     public $table = 'cart_set_case';
-    protected $fillable = ['item_sku', 'item_count', 'item_cost', 'device_name', 'case_name', 'item_source', 'offer_id'];
+    protected $fillable = ['item_sku', 'item_count', 'item_cost', 'device_name', 'case_name', 'item_source', 'offer_id', 'date_send', 'date_supposed', 'date_back', 'print_status_id'];
     protected $casts = ['item_source' => 'array'];
     
     protected $appends = [

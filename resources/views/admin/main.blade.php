@@ -59,6 +59,7 @@
 						</div><br>
 						<button type="submit" class="btn btn-default btn-sm">Показать</button>
 						<a id="getCsvBtn" class="btn btn-default">Товары в печать</a>
+						<a id="getBackCsvBtn" class="btn btn-default">Получено из печати</a>
 					</div>
 				</div>
 				<?php

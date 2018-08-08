@@ -93,11 +93,13 @@ $destinationOrder = session('destination_order_implode', null);
                 </td>
                 <td class="text-right">
                     <ul>
-                        @foreach ($order->cart->cartSetProducts as $cartSetProduct)
-                            <li style="list-style-type: none;">{{ $cartSetProduct->id }}</li>
-                        @endforeach
+                        @if (isset($order->cart))
+                            @foreach ($order->cart->cartSetProducts as $cartSetProduct)
+                                <li style="list-style-type: none;">{{ $cartSetProduct->id }}</li>
+                            @endforeach
+                        @endif
                     </ul>
-                    {{--@if ($order->cart)
+                    {{--@if($order->cart)
                         <a href="{{ action('Admin@cart', ['f_id' => $order->cart->cart_id]) }}">{{ $order->cart->cart_id }}</a>
                     @endif--}}
                 </td>
@@ -129,8 +131,9 @@ $destinationOrder = session('destination_order_implode', null);
                 <td class="text-right">
                     @php
                         $product_sum = 0;
-                        foreach ($order->cart->cartSetProducts as $cartSetProduct)
-                            $product_sum += $cartSetProduct->item_count;
+                        if (isset($order->cart))
+                            foreach ($order->cart->cartSetProducts as $cartSetProduct)
+                                $product_sum += $cartSetProduct->item_count;
                     @endphp
                     @if ($order->cart)
                         {{ $product_sum }}

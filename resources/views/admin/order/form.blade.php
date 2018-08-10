@@ -114,7 +114,12 @@
                                     <tbody>
                                     <tr>
                                         <td style="width: 250px;">
-                                            <img src="{{ route('orders.showImage', ['order' => $order, 'hash' => $order->order_hash, 'img' => 'item_'.$item->cart_set_id.'.png']) }}"
+                                            @php
+                                                $file = route('orders.showImage', ['order' => $order, 'hash' => $order->order_hash, 'img' => 'item_'.$item->cart_set_id.'.png']);
+                                                if (!file_exists($file))
+                                                    $file = $item->offer->product->mainPhoto();
+                                            @endphp
+                                            <img src="{{ $file }}"
                                                  alt="Элемент {{ $n + 1 }}" style="width: 200px;">
                                         </td>
                                         <td style="vertical-align: top">

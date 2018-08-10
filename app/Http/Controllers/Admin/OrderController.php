@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\OrderImplode;
+use App\Models\Background;
 use App\Models\CartSet;
 use App\Models\CartSetCase;
 use App\Models\CartSetProduct;
@@ -767,33 +768,58 @@ class OrderController extends Controller
     {
         if ($order->cart) {
             if (true) {
-
                 $product = Product::find($request->input('product_id'));
                 //dump($product);
                 /** @var Offer $offer */
                 $offer = $product->offers()->first();
-
-                $cartHelper->put(
-                    Ohcasey::SKU_PRODUCT,
-                    1,
-                    [],
-                    $offer->id,
-                    $order->cart
-                );
+                $sku = $product->offers->first()->optionValues()->where(['option_id' => 1])->get() !== [] ?  Ohcasey::SKU_DEVICE : Ohcasey::SKU_PRODUCT;
+                //dump($product);
+                if ($sku === Ohcasey::SKU_DEVICE) {
+                    $offer = null;
+                    foreach ($product->offers as $o) {
+                        if ($o->optionValues()->where(['option_id' => 1])->first() &&
+                            $o->optionValues()->where(['option_id' => 3])->first()) {
+                            $offer = $o;
+                            break;
+                        }
+                    }
+                    if ($offer && $product->background_id) {
+                        $cartHelper->put(
+                            $sku,
+                            1,
+                            ['DEVICE' => [
+                                'device' => $offer->optionValues()->where(['option_id' => 1])->first()->value,
+                                'color' => 0,
+                                'casey' => $offer->optionValues()->where(['option_id' => 3])->first()->value,
+                                'bg' => Background::find($product->background_id)->first()->name,
+                            ]],
+                            $offer->id,
+                            $order->cart
+                        );
+                    }
+                } else {
+                    $cartHelper->put(
+                        $sku,
+                        1,
+                        [],
+                        $offer->id,
+                        $order->cart
+                    );
+                }
 
                 $order->order_amount = $order->cart->summary->amount;
                 $order->save();
 
                 OrderLog::create([
                     'order_id'    => $order->order_id,
-                    'description' => 'Добавил товар ' . $offer->product->name,
+                    'description' => 'Добавил товар ',
                     'short_code'  => OrderLog::CUSTOM_CODE,
                 ]);
                 return redirect()->to(\URL::previous() . '#cartSetCase');
             } else {
-                return redirect()
+                /*return redirect()
                     ->to(\URL::previous())
-                    ->withErrors(['Не указано количество или предложение']);
+                    ->withErrors(['Не указано количество или предложение']);*/
             }
         }
 

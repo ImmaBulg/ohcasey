@@ -12,14 +12,14 @@
     } else if($current_options !== []) {
         $title = ucfirst($current_options['device_name']) . ' ' . $current_options['color_name'] . ' ' . $category->title . ' ' . ucfirst($current_options['device_name']) . ' ' . lcfirst($current_options['case_name']);
         $keywords = implode(' ' . lcfirst($current_options['device_name']) . ' ' . $current_options['color_name'] . ' ' . lcfirst($current_options['case_name']) . ', ', mb_split(', ', $category->keywords)) . ' ' . lcfirst($current_options['device_name']) . ' ' . $current_options['color_name'] . ' ' . lcfirst($current_options['case_name']);
-        $h1 = ucfirst($current_options['device_name']) . ' ' . $category->h1 . ' - ' . $current_options['color_name'] . ' ' . $current_options['device_name'] . '(' . $current_options['case_name'] . ')';
+        $h1 = ucfirst( $category->h1 . ' - ' . $current_options['device_name']);
         $description = $category->description;
     }
     else {
         $title = $category->title;
         $keywords = $category->keywords;
         $description = $category->description;
-        $h1 = $category->h1;
+        $h1 = ucfirst( $category->h1 . ' - ' . $current_options['device_name']);
     }
 $str_breadcrumbs = 'ohcasey';
 foreach($breadcrumbs as $b) {
@@ -79,7 +79,7 @@ foreach($breadcrumbs as $b) {
         <div class="banner banner--top" style="background-image: url('{{ $category->banner_image }}')">
             <div class="container">
                 <div class="banner__inner">
-                    <h1 class="banner__title">{{$category->h1 ?: $category->title}}</h1>
+                    <h1 class="banner__title">{{$h1 !== "" ? $h1 : ($category->h1 ?: $category->title)}}</h1>
                     <div class="banner__text">{{$category->h2}}</div>
                 </div>
             </div>

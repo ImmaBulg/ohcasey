@@ -338,7 +338,7 @@ class PeriodExportController extends Controller
                 $undergrounds = @file_get_contents(static::UNDERGROUNDS_URL . str_replace(' ', ',', $geocodes['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['Point']['pos']));
                 $undergrounds = json_decode($undergrounds, true);
                 if(isset($undergrounds['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['name'])){
-                    $metroName = $undergrounds['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['name'] . '. ' . $undergrounds['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['description'];
+                    $metroName = $undergrounds['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['name'];
                 }
             }
             $sheet->setCellValue("F$rowNumber", $metroName);

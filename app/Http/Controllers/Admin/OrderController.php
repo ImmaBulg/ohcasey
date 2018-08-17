@@ -772,7 +772,7 @@ class OrderController extends Controller
                 //dump($product);
                 /** @var Offer $offer */
                 $offer = $product->offers()->first();
-                $sku = $product->offers->first()->optionValues()->where(['option_id' => 1])->get() !== [] ?  Ohcasey::SKU_DEVICE : Ohcasey::SKU_PRODUCT;
+                $sku = $product->offers->first()->optionValues()->where(['option_id' => 1])->first() ?  Ohcasey::SKU_DEVICE : Ohcasey::SKU_PRODUCT;
                 //dump($product);
                 if ($sku === Ohcasey::SKU_DEVICE) {
                     $offer = null;

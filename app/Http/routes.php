@@ -267,6 +267,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
             Route::post('{order}/delete',                                'OrderController@delete')->name('admin.order.delete');
         });
 
+        Route::group(['prefix' => 'cart_set_product'], function() {
+            Route::get('last',                                           'CartSetProduct@lastItem');
+        });
+
         Route::group(['prefix' => 'sms_templates'], function () {
             Route::get('/',                     'SmsTemplatesController@index')->name('admin.sms_templates.index');
             Route::get('create',                'SmsTemplatesController@create')->name('admin.sms_templates.create');
@@ -305,7 +309,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 
-        Route::group(['prefix' => 'ecommerce'], function(){
+    Route::get('/prints', 'PrintsController@index')->name('admin.prints');
+    Route::post('/updatePrintStatus', 'PrintsController@updatePrintStatus');
+
+    Route::group(['prefix' => 'ecommerce'], function(){
         Route::get('/', 'EcommerceController@showView');
 
         Route::get('/product', 'EcommerceController@showView')->name('admin.ecommerce.product.index');
@@ -342,6 +349,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 
         Route::get('/offer/generator', 'CaseController@index')->name('admin.ecommerce.generator.index');
         Route::get('/offer/generator/cases', 'CaseController@generate');
+
+        Route::get('/print', 'EcommerceController@showView')->name('admin.ecommerce.print.index');
     });
 
     Route::group(['prefix' => 'menu_links'], function() {

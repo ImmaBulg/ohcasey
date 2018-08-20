@@ -12,9 +12,23 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Ohcasey - администратор</title>
 
+    @php
+        $last_add = 0;
+        foreach (\App\Models\CartSetProduct::orderBy('created_at', 'desc')->get() as $item) {
+            if ($item->cart->order) {
+                $last_add = $item->id;
+                break;
+            }
+        }
+    @endphp
+
     <script type="text/javascript">
         var BASE_URL = '{{ url('admin') }}';
         var LAST_ORDER_ID = {{ \App\Models\Order::where('order_ts', '>', '2017-12-22')->max('order_id') ?: 0 }};
+        var USER_LOGIN = '{{ \Auth::user()->login }}';
+        var LAST_UPDATE_ID = {{ \App\Models\CartSetProduct::whereIn('print_status_id', [78, 68, 69, 67])->orderBy('updated_at', 'desc')->pluck('id')->first() ?: 0 }};
+        var LAST_ADD_ID = {{ $last_add }};
+
     </script>
 
     <!-- Bootstrap Core CSS -->
@@ -169,6 +183,9 @@
                             </ul>
                         </li>
                     @endif
+                        <li>
+                            <a href="{{ route('admin.prints', ['f_date_end' => (new DateTime('now'))->format('Y-m-d'), 'f_date_start' => (new DateTime('now'))->modify('-7 day')->format('Y-m-d')]) }}">Печать</a>
+                        </li>
                     <li>
 						<a href="{{ route('admin.cdekForm') }}">Доставки</a>
 					</li>

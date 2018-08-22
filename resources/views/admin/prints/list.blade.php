@@ -60,8 +60,8 @@
                                 </tr>
                                 <tr>
                                     <th class="text-center">Дата заказа</th>
-                                    <th class="text-center">ID товара</th>
-                                    <th class="text-center">ID заказа</th>
+                                    <th style="width: 6%" class="text-center">ID товара</th>
+                                    <th style="width: 6%" class="text-center">ID заказа</th>
                                     <th class="text-center">Тип товара</th>
                                     <th class="text-center">Наименование</th>
                                     <th class="text-center">Крой</th>
@@ -74,6 +74,28 @@
                                     <th class="text-center">Дата доставки</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input autocomplete="off" id="f_date" name="f_date" value="{{ request('f_date', '') }}" type="text" class="form-control text-right" placeholder="Дата"></td>
+                                    <td><input autocomplete="off" id="f_item" name="f_item" value="{{ request('f_item', '') }}" type="text" class="form-control text-right" placeholder="ID товара"></td>
+                                    <td><input autocomplete="off" id="f_order" name="f_order" value="{{ request('f_order', '') }}" type="text" class="form-control text-right" placeholder="ID заказа"></td>
+                                    <td></td>
+                                    <td><input autocomplete="off" id="f_name" name="f_name" value="{{ request('f_name', '') }}" type="text" class="form-control text-right" placeholder="Наименование"></td>
+                                    <td colspan="4"></td>
+                                    <td>
+                                        <select id="f_status">
+                                            <option></option>
+                                            @foreach ($print_status as $status)
+                                                @if ($status['id'] == request('f_status', ''))
+                                                    <option class="option_select_{{ $status['id'] }}" selected value="{{ $status['id'] }}">{{ $status['title'] }}</option>
+                                                @else
+                                                    <option class="option_select_{{ $status['id'] }}" value="{{ $status['id'] }}">{{ $status['title'] }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
                             <tbody>
                                 @foreach ($rows as $row)
                                     <tr>
@@ -131,11 +153,29 @@
 @section('scripts')
     <script src="{{ url('js/prints_page.js') }}"></script>
     <script>
+        $('#f_status').select2({
+            placeholder: 'Статус',
+        });
         $('#show_product').click(function() {
             let start = $('#f_date_start').val();
             let end = $('#f_date_end').val();
-
-            document.location.href = "/admin/prints?f_date_start=" + start + "&f_date_end=" + end;
+            let params = '';
+            if ($('#f_date').val()) {
+                params += ('&f_date=' + $('#f_date').val());
+            }
+            if ($('#f_item').val()) {
+                params += ('&f_item=' + $('#f_item').val());
+            }
+            if ($('#f_order').val()) {
+                params += ('&f_order=' + $('#f_order').val());
+            }
+            if ($('#f_status').val()) {
+                params += ('&f_status=' + $('#f_status').val());
+            }
+            if ($('#f_name').val()) {
+                params += ('&f_name=' + $('#f_name').val());
+            }
+            document.location.href = "/admin/prints?f_date_start=" + start + "&f_date_end=" + end + params;
         });
     </script>
 @endsection

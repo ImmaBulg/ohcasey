@@ -324,6 +324,54 @@ class Admin extends Controller
         return view('admin.backgrounds_stats', ['backgrounds' => $backgrounds, 'models' => $models]);
     }
 
+    public function futStat(Request $request) {
+        $start = (new Carbon($request->input('f_date_start'), 'Europe/Moscow'))->startOfDay();
+        if (! $request->has('f_date_start')) {
+            $start->subYears(100);
+        }
+        $end = (new Carbon($request->input('f_date_end'), 'Europe/Moscow'))->startOfDay()->addDay();
+
+        $cartsCollection = Cart::with(['order', 'cartSetCase'])
+            ->whereHas('order', function ($query) use ($start, $end) {
+                $query->whereBetween('order_ts', [$start, $end]);
+            });
+
+
+
+        $tshirts = [];
+        $tshirts_name = [];
+        $cartsCollection->chunk(100, function ($carts) use (&$tshirts, &$tshirts_name) {
+            foreach($carts as $cart){
+                foreach($cart->cartSetProducts as $setProduct){
+                    if(isset($setProduct->cart)){
+                        if (isset($setProduct->cart->order, $setProduct->offer->product)) {
+                            if ($setProduct->offer->product->option_group_id === 9) {
+                                if (isset($tshirts[$setProduct->offer->product->photos()->first()->name])) {
+                                    $tshirts[$setProduct->offer->product->photos()->first()->name] += $setProduct->item_count;
+                                } else {
+                                    $tshirts[$setProduct->offer->product->photos()->first()->name] = $setProduct->item_count;
+                                    $tshirts_name[$setProduct->offer->product->photos()->first()->name] = $setProduct->offer->product->name;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        //->whereBetween('cart.order_ts', [$start, $end])->get()
+        arsort($tshirts);
+
+        foreach ($tshirts_name as $tshirt => $name) {
+            $count = $tshirts[$tshirt];
+            $tshirts[$tshirt] = [];
+            $tshirts[$tshirt][0] = $name;
+            $tshirts[$tshirt][1] = $count;
+        }
+
+        return view('admin.tshirt_start', ['tshirts' => $tshirts]);
+    }
+
     /**
      * Add postfix if file already exists
      * @param $path

@@ -102,6 +102,12 @@ class CategoryController extends Controller
             $tags[$t->phone] = $t;
             if ($t->phone === $params['device']) {
                 $current_tags = $t;
+                $current_tags->title = $current_tags->title ?: $category->title;
+                $current_tags->keywords = $current_tags->keywords ?: $category->keywords;
+                $current_tags->h1 = $current_tags->h1 ?: $category->h1;
+                $current_tags->desc = $current_tags->desc ?: $category->description;
+                $current_tags->text_up = $current_tags->text_up ?: $category->text_top;
+                $current_tags->text_down = $current_tags->text_down ?: $category->text_bottom;
             }
         }
         if ($params['device'] != '') {

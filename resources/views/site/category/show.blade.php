@@ -19,7 +19,7 @@
         $title = $category->title;
         $keywords = $category->keywords;
         $description = $category->description;
-        $h1 = ucfirst( $category->h1 . ' - ' . $current_options['device_name']);
+        $h1 = ucfirst($category->h1);
     }
 $str_breadcrumbs = 'ohcasey';
 foreach($breadcrumbs as $b) {
@@ -187,7 +187,7 @@ foreach($breadcrumbs as $b) {
                                 @endif
                             @endforeach
                         </div>
-                        <a class="catalog__item" :href="'/product/' + product.id + $route.fullPath" v-for="product in data">							
+                        <a class="catalog__item" :href="setFullUrl(product)" v-for="product in data">
                             <span class="catalog__img js-img">
                                 <span v-if="product.hit" class="catalog__label catalog__label--black">хит</span>
                                 <span v-if="product.sale" class="catalog__label catalog__label--red">sale</span>

@@ -1263,7 +1263,7 @@ var DesignCard = function (_BasicClass2) {
             var designId = $(ev.currentTarget).attr('href');
             _this4.setState({ designId: designId, isOpen: true });
             var activeDesign = store.state.entities[designId];
-            $('title').text(activeDesign.meta_title ? activeDesign.meta_title : 'Ohcasey');
+            //$('title').text(activeDesign.meta_title ? activeDesign.meta_title : 'Ohcasey');
             var hash = window.location.hash.length ? window.location.hash : '';
             history.pushState({}, '', BASE_URL + "/" + designId + hash);
         };
@@ -1371,6 +1371,8 @@ var DesignCard = function (_BasicClass2) {
             if (!activeDesign || !this.state.isOpen) return null;
 
             var $body = $('body, .header');
+            var title = 'Чехол для телефона ';
+            var h1 = 'Чехол на телефон ' + activeDesign.name;
 
             $body.css({ 'width': $body.width() + "px" }).addClass('design-card-is-visible');
             //Вставляем лайки
@@ -1383,8 +1385,10 @@ var DesignCard = function (_BasicClass2) {
             //Вставляем хэштеги
             var hashTags = "";
             activeDesign.hashTags.map(function (hashtag, index) {
-                hashTags += "<a href=\"" + (BASE_URL + "/" + hashtag.replace('#', '')) + "\" class=\"design-card__hashtag\" data-analytic=\"tag_card\" data-metrika=\"HASHTAGBUTTION_INST\">\n                            " + (index === 0 ? '<h1>' : '') + hashtag + (index === 0 ? '</h1>' : '') + "\n                        </a>";
+                hashTags += "<a href=\"" + (BASE_URL + "/" + hashtag.replace('#', '')) + "\" class=\"design-card__hashtag\" data-analytic=\"tag_card\" data-metrika=\"HASHTAGBUTTION_INST\">\n                            " + (index === 0 ? '<h1>' + h1 + '</h1>': hashtag) + "\n                        </a>";
+                title += (hashtag + ' ');
             });
+            $('meta[name=keywords]').attr('content', title + ', ' + h1);
             $('.design-card-hashtags').html(hashTags);
 
             //Вставляем слайды
@@ -1394,15 +1398,17 @@ var DesignCard = function (_BasicClass2) {
                     var posterPath = BASE_URL + "/files/thumbnails/" + Video.getFileName(slide.path) + ".png";
                     slides += "\n                    <div class=\"design-slide\" data-link=\"" + slide.link + "\">\n                        <a href=\"#\" class=\"play-btn\"><span class=\"icon icon-play\"></span></a>\n                        <video preload=\"metadata\" poster=\"" + posterPath + "\">\n                            <source src=\"" + BASE_URL + slide.path + "\" type=\"video/mp4\">\n                        </video>\n                    </div>\n                ";
                 } else {
-                    slides += "\n                    <div class=\"design-slide\" data-link=\"" + slide.link + "\">\n                        <img src=\"" + BASE_URL + slide.path + "\" alt=\"" + activeDesign.name + "\" title=\"" + activeDesign.name + "\">\n                    </div>\n";
+                    slides += "\n                    <div class=\"design-slide\" data-link=\"" + slide.link + "\">\n                        <img src=\"" + BASE_URL + slide.path + "\" alt=\"" + activeDesign.name + " на чехле смартфона\" title=\"" + activeDesign.name + " на чехле телефона от Ohcasey\">\n                    </div>\n";
                 }
             });
             this.carousel.html(slides).owlCarousel(this.carouselConfig);
 
-            $('.design-name').html(activeDesign.h1);
+            $('.design-name').html(h1);
             $('.design-description').html(activeDesign.description);
             $('.design-card-related-grid').html(this.getRelatedItems());
             //$('.design-wish-link').attr('href', activeDesign.link ? activeDesign.link : '#');
+            document.title = title;
+
         }
     }]);
 

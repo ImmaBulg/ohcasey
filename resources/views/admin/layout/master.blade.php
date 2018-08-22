@@ -184,6 +184,9 @@
                         </li>
                     @endif
                         <li>
+                            <a href="{{ route('admin.tshirt-stat', ['f_date_end' => (new DateTime('now'))->format('Y-m-d'), 'f_date_start' => (new DateTime('now'))->modify('-1 month')->format('Y-m-d')])}}"><i class="fa fa-pie-chart fa-fw"></i> Футболки - статистика</a>
+                        </li>
+                        <li>
                             <a href="{{ route('admin.prints', ['f_date_end' => (new DateTime('now'))->format('Y-m-d'), 'f_date_start' => (new DateTime('now'))->modify('-7 day')->format('Y-m-d')]) }}">Печать</a>
                         </li>
                     <li>

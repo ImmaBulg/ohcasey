@@ -190,6 +190,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::post('bgSaveOrder', 'Admin@bgSaveOrder');
     
     Route::get('bgstat', 'Admin@bgStat');
+    Route::get('tshirt-stat', 'Admin@futStat')->name('admin.tshirt-stat');
+
 
     Route::get('smile', 'Admin@smile');
     Route::post('smile', 'Admin@smileUpload');

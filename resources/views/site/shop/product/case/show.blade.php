@@ -6,7 +6,7 @@
 @section('keywords', $product->keywords)
 */ ?>
 @section('title', $product->title)
-@section('keywords', $product->keywords)
+@section('keywords', "Чехол для $device_caption $product->name (материал $case_caption)")
 @section('description', strip_tags($product->description))
 
 @section('content')
@@ -68,13 +68,13 @@
             <div class="card">
                 <div class="slider">
                     <div class="slider__main js-slider-for" v-cloak>
-                        <div v-if="photos.offer"><img :src="photos.offer" title="Чехол для {{ $device_caption }} «{{$product->name}}» (материал {{ $case_caption }})" alt="Чехол для {{ $device_caption }} «{{$product->name}}» (материал {{ $case_caption }})"></div>
-                        <div v-for="p in photos.product"><img :src="p.url" title="Чехол для {{ $device_caption }} «{{$product->name}}» (материал {{ $case_caption }})" alt="Чехол для {{ $device_caption }} «{{$product->name}}» (материал {{ $case_caption }})"></div>
+                        <div v-if="photos.offer"><img :src="photos.offer" title="Чехол для {{ $device_caption }} {{$product->name}} материал {{ $case_caption }}" alt="Чехол для {{ $device_caption }} {{$product->name}} - Ohcasey"></div>
+                        <div v-for="p in photos.product"><img :src="p.url" title="Чехол для {{ $device_caption }} {{$product->name}} материал {{ $case_caption }}" alt="Чехол для {{ $device_caption }} {{$product->name}} - Ohcasey"></div>
                     </div>
 
                     <div class="slider__nav js-slider-nav" v-cloak>
-                        <div v-if="photos.offer"><img :src="photos.offer" title="Чехол для {{ $device_caption }} «{{$product->name}}» (материал {{ $case_caption }})" alt="Чехол для {{ $device_caption }} «{{$product->name}}» (материал {{ $case_caption }})"></div>
-                        <div v-for="p in photos.product"><img :src="p.url" title="Чехол для {{ $device_caption }} «{{$product->name}}» (материал {{ $case_caption }})" alt="Чехол для {{ $device_caption }} «{{$product->name}}» (материал {{ $case_caption }})"></div>
+                        <div v-if="photos.offer"><img :src="photos.offer" title="Чехол для {{ $device_caption }} {{$product->name}} материал {{ $case_caption }}" alt="Чехол для {{ $device_caption }} {{$product->name}} - Ohcasey"></div>
+                        <div v-for="p in photos.product"><img :src="p.url" title="Чехол для {{ $device_caption }} {{$product->name}} материал {{ $case_caption }}" alt="Чехол для {{ $device_caption }} {{$product->name}} - Ohcasey"></div>
                     </div>
                 </div>
 

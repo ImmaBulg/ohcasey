@@ -3,7 +3,7 @@
         <ul class="left-nav">
             @foreach ($children as $child)
                 <li class="left-nav__item{{$category->slug == $child->slug ? ' is-active' : ''}}">
-                    <a class="left-nav__link" href="{{route('shop.slug', $child->url)}}" style="{{ count($child->selfChildren) ? 'display: inline-block;' : '' }}">{{$child->name}}</a>
+                    <a class="left-nav__link" href="{{route('shop.slug', [$child->url, 'sort' => '', 'device' => 'iphone'])}}" style="{{ count($child->selfChildren) ? 'display: inline-block;' : '' }}">{{$child->name}}</a>
                     @if(count($child->selfChildren))
                         <span class="collapseBtn" data-toggle="collapse" data-target="{{ '#collapseExample' . $child->id }}" style="cursor: pointer; display: inline;">
                                             <i class="fa fa-plus"></i>

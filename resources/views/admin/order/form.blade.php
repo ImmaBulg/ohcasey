@@ -5,6 +5,10 @@
 @section('scripts')
     {{---- Столько всего пришлось подрубить что-бы заработал калькулятор доставки ----}}
     <script type="text/javascript">
+        var SMS_TEMPLATES = {!!  \App\Models\SmsTemplate::all()  !!};
+        var ORDERS = {!!  $orders->getCollection()  !!};
+    </script>
+    <script type="text/javascript">
         var URL_STORAGE  = '{{ url('storage') }}';
         var URL_FONT = '{{ url('font/image') }}';
         var GEO = {!! json_encode((new App\Ohcasey\Ohcasey())->geo()) !!};
@@ -24,6 +28,9 @@
             border: 3px dashed orange;
         }
     </style>
+    @if ($order->order_id === 18644)
+        {{ dump($order) }}
+    @endif
     <form autocomplete="off" method="POST" action="{{route('admin.order.update', $order)}}" id="order-form">
         <div class="row">
             <div class="col-lg-6">
@@ -39,7 +46,7 @@
             </div>
         </div>
         <div class="row" style="margin-top: 25px;">
-            <div class="col-md-3 col-xs-3">
+            <div class="col-md-1 col-xs-1">
                 Статус заказа
             </div>
             <div class="col-md-4 col-xs-4 order-status-admin">
@@ -183,7 +190,7 @@
 
                                         </td>
                                         <td>
-                                            <div class="panel panel-primary" data-itemid="{{ $item->cart_set_id }}" data-orderid="{{ $order->order_id }}" data-type="case">
+                                            <div class="panel panel-info" data-itemid="{{ $item->cart_set_id }}" data-orderid="{{ $order->order_id }}" data-type="case">
                                                 <div class="panel-heading">Печать</div>
                                                 <div class="panel-body">
                                                     <div class="form-group name">
@@ -262,7 +269,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-3 col-md-3">
                                                         <label>
-                                                            Свойства:
+                                                            Размер:
                                                         </label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
@@ -284,7 +291,7 @@
                                                     </div>
                                                 </div>
                                                 @if ($item->offer->product->option_group_id == 9)
-                                                    <div class="row">
+                                                    {{--<div class="row">
                                                         <div class="col-lg-3 col-md-3">
                                                             <label>
                                                                 Размер
@@ -304,7 +311,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>--}}
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-3">
                                                             <label>
@@ -355,7 +362,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-3" style="padding-top: 2px">
-                                        <div class="panel panel-primary" data-itemid="{{ $item->id }}" data-orderid="{{ $order->order_id }}">
+                                        <div class="panel panel-info" data-itemid="{{ $item->id }}" data-orderid="{{ $order->order_id }}">
                                             <div class="panel-heading">Печать</div>
                                             <div class="panel-body">
                                                 <div class="form-group name">

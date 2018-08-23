@@ -114,8 +114,12 @@ class Admin extends Controller
 		$casesSum = 0;
 		$productsSum = 0;
 		$ordersSum = 0;
-		$orders->chunk(200, function ($ords) use (&$casesSum, &$productsSum, &$ordersSum){
-			$ords->each(function ($o, $k) use (&$casesSum, &$productsSum, &$ordersSum) {
+		$ordersSumStatus = 0;
+		$orders->chunk(200, function ($ords) use (&$casesSum, &$productsSum, &$ordersSum, &$ordersSumStatus){
+			$ords->each(function ($o, $k) use (&$casesSum, &$productsSum, &$ordersSum, &$ordersSumStatus) {
+			    if (!in_array($o->order_status_id, [OrderStatus::STATUS_ID_CANCELED, OrderStatus::STATUS_ID_WAIT_PAYMENT, OrderStatus::STATUS_ID_THINKS])) {
+			        $ordersSumStatus += $o->order_amount;
+                }
 				$ordersSum += $o->order_amount;
 				if($o->cart && $o->cart->cartSetCase()->sum('item_count') != null){
 					$casesSum += $o->cart->cartSetCase()->sum('item_count');
@@ -156,6 +160,7 @@ class Admin extends Controller
 			'casesSum' => $casesSum,
 			'productsSum' => $productsSum,
 			'ordersSum' => $ordersSum,
+            'ordersSumStatus' => $ordersSumStatus,
         ]);
     }
 
@@ -333,6 +338,7 @@ class Admin extends Controller
 
         $cartsCollection = Cart::with(['order', 'cartSetCase'])
             ->whereHas('order', function ($query) use ($start, $end) {
+                $query->whereIn('order_status_id', [OrderStatus::STATUS_ID_IN_PRINT, OrderStatus::STATUS_ID_FINISHED, OrderStatus::STATUS_ID_PAID]);
                 $query->whereBetween('order_ts', [$start, $end]);
             });
 
@@ -344,8 +350,8 @@ class Admin extends Controller
             foreach($carts as $cart){
                 foreach($cart->cartSetProducts as $setProduct){
                     if(isset($setProduct->cart)){
-                        if (isset($setProduct->cart->order, $setProduct->offer->product)) {
-                            if ($setProduct->offer->product->option_group_id === 9) {
+                        if (isset($setProduct->cart->order, $setProduct->offer, $setProduct->offer->product)) {
+                            if ($setProduct->offer->product->option_group_id === 9 && $setProduct->offer->product->photos()->first()) {
                                 if (isset($tshirts[$setProduct->offer->product->photos()->first()->name])) {
                                     $tshirts[$setProduct->offer->product->photos()->first()->name] += $setProduct->item_count;
                                 } else {
@@ -862,7 +868,6 @@ class Admin extends Controller
             'Заказ',
             'ID продукта в заказе',
             'Дизайн футболки',
-            'Тип футболки',
             'Размер',
             'Количество',
             'Тип нанесения',
@@ -881,7 +886,6 @@ class Admin extends Controller
                     $cartSetProduct->id,
                     $product->name,
                     isset($cartSetProduct->offer) ? $cartSetProduct->offer->optionValues[0]->title : '',
-                    ($cartSetProduct->size) ? OptionValue::where(['id' => $cartSetProduct->size])->pluck('title')[0] : 'Не задана',
                     $cartSetProduct->item_count,
                     ($cartSetProduct->print) ? OptionValue::where(['id' => $cartSetProduct->print])->pluck('title')[0] : 'Не задан',
                     ($cartSetProduct->print_status_id) ? OptionValue::where(['id' => $cartSetProduct->print_status_id])->pluck('title')[0] : 'Не задан',
@@ -901,7 +905,6 @@ class Admin extends Controller
                     $cartSetCase->cart_set_id,
                     $cartSetCase->casey->case_caption . ' чехол на ' . $cartSetCase->device->device_caption,
                     '',
-                    'Не задана',
                     $cartSetCase->item_count,
                     'Не задан',
                     ($cartSetCase->print_status_id) ? OptionValue::where(['id' => $cartSetCase->print_status_id])->pluck('title')[0] : 'Не задан',
@@ -952,7 +955,6 @@ class Admin extends Controller
             'Заказ',
             'ID продукта в заказе',
             'Дизайн футболки',
-            'Тип футболки',
             'Размер',
             'Количество',
             'Тип нанесения',
@@ -971,7 +973,6 @@ class Admin extends Controller
                     $cartSetProduct->id,
                     $product->name,
                     isset($cartSetProduct->offer) ? $cartSetProduct->offer->optionValues[0]->title : '',
-                    ($cartSetProduct->size) ? OptionValue::where(['id' => $cartSetProduct->size])->pluck('title')[0] : 'Не задана',
                     $cartSetProduct->item_count,
                     ($cartSetProduct->print) ? OptionValue::where(['id' => $cartSetProduct->print])->pluck('title')[0] : 'Не задан',
                     ($cartSetProduct->print_status_id) ? OptionValue::where(['id' => $cartSetProduct->print_status_id])->pluck('title')[0] : 'Не задан',

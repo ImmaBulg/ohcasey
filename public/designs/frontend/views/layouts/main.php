@@ -111,6 +111,16 @@ AppAsset::register($this);
                     <img src="<?=Yii::$app->urlManager->baseUrl?>/img/logo.png" alt="Ohcasey">
                 </a>
                 <nav class="main-nav">
+                    <a href="/futbolki" class="main-nav__item" data-metrika="FUTBOLKIUPMENU_INST">ФУТБОЛКИ</a>
+                    <div class="main-nav__item">
+                        <span class="main-nav__item-expanded" data-metrika="ALLCASES">ВСЕ ЧЕХЛЫ</span>
+                        <div class="drop-nav">
+                            <a href="/collections/" class="drop-nav__link" data-metrika="AUTHORCASESUPMENU_INST">Авторские коллекции</a>
+                            <a href="/glitter" class="drop-nav__link" data-metrika="GLITTERUPMENU_INST">Чехлы с блестками</a>
+                            <a href="/cases" class="drop-nav__link" data-metrika="SILICONCOLORUPMENU_INST">Силиконовые одноцветные чехлы</a>
+                            <!--                             <a href="/salecases" class="drop-nav__link" data-metrika="SALEUPMENU_INST">SALE!</a> -->
+                        </div>
+                    </div>
                     <div class="main-nav__item">
                         <span class="main-nav__item-expanded" data-metrika="CREATEBUTTION_INST">СОЗДАЙ СВОЙ ЧЕХОЛ</span>
                         <div class="drop-nav">
@@ -118,17 +128,7 @@ AppAsset::register($this);
                             <a href="/designs" class="drop-nav__link" data-metrika="INSTASHOPUPMENU_INST">Instagram Shop</a>
                         </div>
                     </div>
-                    <div class="main-nav__item">
-                        <span class="main-nav__item-expanded" data-metrika="ALLCASES">ВСЕ ЧЕХЛЫ</span>
-                        <div class="drop-nav">
-                            <a href="/collections/" class="drop-nav__link" data-metrika="AUTHORCASESUPMENU_INST">Авторские коллекции</a>
-                            <a href="/glitter" class="drop-nav__link" data-metrika="GLITTERUPMENU_INST">Чехлы с блестками</a>
-                            <a href="/cases" class="drop-nav__link" data-metrika="SILICONCOLORUPMENU_INST">Силиконовые одноцветные чехлы</a>
-<!--                             <a href="/salecases" class="drop-nav__link" data-metrika="SALEUPMENU_INST">SALE!</a> -->
-                        </div>
-                    </div>
-                    <a href="/futbolki" class="main-nav__item" data-metrika="FUTBOLKIUPMENU_INST">ФУТБОЛКИ</a>
-                    <a href="/kruzhki" class="main-nav__item" data-metrika="KRUZHKIUPMENU_INST">КРУЖКИ</a>
+                    <!--<a href="/kruzhki" class="main-nav__item" data-metrika="KRUZHKIUPMENU_INST">КРУЖКИ</a>-->
                     <a href="/delivery" class="main-nav__item" data-metrika="DELIVERYUPMENU_INST">ДОСТАВКА</a>
                     <a href="/contacts" class="main-nav__item" data-metrika="CONTACTSUPMENU_INST">КОНТАКТЫ</a>
                 </nav>

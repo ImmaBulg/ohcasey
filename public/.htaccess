@@ -5,6 +5,11 @@
 
     RewriteEngine On
 
+    # SEO Redirect
+    RewriteCond %{QUERY_STRING} !sort=&device=(.*)
+    RewriteCond %{REQUEST_URI} collections
+    RewriteRule ^collections/(.*)$ https://%{HTTP_HOST}/collections/$1?sort=&device=iphone [R=301,QSA,L]
+
     # Redirect on https
     RewriteCond %{SERVER_PORT} !^443$
     RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]

@@ -54,7 +54,7 @@
                         <table class="table table-striped table-hover table-condensed table-bordered">
                             <thead>
                                 <tr>
-                                    <th colspan="9" class="text-center">ТОВАР</th>
+                                    <th colspan="8" class="text-center">ТОВАР</th>
                                     <th colspan="2" class="text-center">ПЕЧАТЬ</th>
                                     <th colspan="2" class="text-center">ДОСТАВКА</th>
                                 </tr>
@@ -64,7 +64,6 @@
                                     <th style="width: 6%" class="text-center">ID заказа</th>
                                     <th class="text-center">Тип товара</th>
                                     <th class="text-center">Наименование</th>
-                                    <th class="text-center">Крой</th>
                                     <th class="text-center">Размер</th>
                                     <th class="text-center">Печать</th>
                                     <th class="text-center">Кол-во</th>
@@ -81,7 +80,7 @@
                                     <td><input autocomplete="off" id="f_order" name="f_order" value="{{ request('f_order', '') }}" type="text" class="form-control text-right" placeholder="ID заказа"></td>
                                     <td></td>
                                     <td><input autocomplete="off" id="f_name" name="f_name" value="{{ request('f_name', '') }}" type="text" class="form-control text-right" placeholder="Наименование"></td>
-                                    <td colspan="4"></td>
+                                    <td colspan="3"></td>
                                     <td>
                                         <select id="f_status">
                                             <option></option>
@@ -115,7 +114,6 @@
                                         <td>{{ $row['product_type'] }}</td>
                                         <td>{{ $row['background_name'] }}</td>
                                         <td>{{ $row['cutting_name'] }}</td>
-                                        <td>{{ $row['print_size'] }}</td>
                                         <td>
                                             @if ($row['print_type'] === 'Прямая печать')
                                                 <span style="color: red;">{{ $row['print_type'] }}</span>

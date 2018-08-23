@@ -36,6 +36,7 @@ class OrderStatus extends Model
     const STATUS_ID_THINKS            = 14;
     const STATUS_ID_FINISHED          = 6;
     const STATUS_ID_CANCELED          = 7;
+    const STATUS_PRINTED              = 4;
 
     public $table      = 'order_status';
     public $timestamps = false;

@@ -58,7 +58,7 @@ $destinationOrder = session('destination_order_implode', null);
 			
 			<td style="text-align: right;">{{ $counters['allCasesSum'] }}</td>
             <td style="text-align: right;">{{ $productsSum }}</td>
-            <td style="text-align: right;">{{ $ordersSum }}</td>
+            <td style="text-align: right;">{{ $ordersSum }}({{$ordersSumStatus}})</td>
             <td></td>
             <td></td>
             <td></td>

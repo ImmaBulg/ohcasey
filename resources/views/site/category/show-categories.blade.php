@@ -83,7 +83,7 @@
                     @if (count($children))
                       <div class="catalog catalog--inner catalog--category js-collection-category">
                         @foreach ($children as $child)
-                          <a class="catalog__item" href="{{route('shop.slug', $child->url)}}">
+                          <a class="catalog__item" href="{{route('shop.slug', [$child->url, 'sort' => '', 'device' => 'iphone'])}}">
                             <span class="catalog__img js-img">
                             @if(!empty($child) && $child->image)
                                 @if($category->id == "36")

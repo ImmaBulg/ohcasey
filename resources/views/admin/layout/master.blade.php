@@ -232,7 +232,7 @@
     </div>
     <!-- /#page-wrapper -->
 
-    <a href="{{ url('admin') }}" id="admin-new-order" class="bg-danger hidden"></a>
+    <a href="{{ route('admin.order.list', ['f_date_end' => ((new DateTime('now'))->format('Y-m-d')), 'f_date_start' => (new DateTime('now'))->format('Y-m-d')]) }}" id="admin-new-order" class="bg-danger hidden"></a>
     <!-- /#admin-new-order -->
 
 </div>

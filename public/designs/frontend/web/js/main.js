@@ -1386,7 +1386,7 @@ var DesignCard = function (_BasicClass2) {
             var hashTags = "";
             activeDesign.hashTags.map(function (hashtag, index) {
                 hashTags += "<a href=\"" + (BASE_URL + "/" + hashtag.replace('#', '')) + "\" class=\"design-card__hashtag\" data-analytic=\"tag_card\" data-metrika=\"HASHTAGBUTTION_INST\">\n                            " + (index === 0 ? '<h1>' + h1 + '</h1>': hashtag) + "\n                        </a>";
-                title += (hashtag + ' ');
+                title += (hashtag.replace('#', '') + ' ');
             });
             $('meta[name=keywords]').attr('content', title + ', ' + h1);
             $('.design-card-hashtags').html(hashTags);

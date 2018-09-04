@@ -34,9 +34,9 @@
                     <li class="tabs__item">
                         <a href="{{ route('shop.cart.process', ['full' => 1]) }}" class="tabs__link{{!$isShort ? ' is-active' : ''}}" style="font-size: 13px">Полное оформление</a> 
                     </li>
-                    <li class="tabs__item"> 
+                    {{--<li class="tabs__item">
                         <a href="{{ route('shop.cart.process', ['short' => 1]) }}" class="tabs__link{{$isShort ? ' is-active' : ''}}" style="font-size: 13px">Быстрое оформление</a>
-                    </li>
+                    </li>--}}
                 </ul> 
 				
 

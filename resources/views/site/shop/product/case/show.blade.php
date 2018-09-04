@@ -5,8 +5,8 @@
 @section('description', strip_tags($product->description))
 @section('keywords', $product->keywords)
 */ ?>
-@section('title', $product->title)
-@section('keywords', "Чехол для $device_caption $product->name (материал $case_caption)")
+@section('title', "Чехол для $device_caption $product->name материал $case_caption")
+@section('keywords', "Чехол для $device_caption $product->name материал $case_caption")
 @section('description', strip_tags($product->description))
 
 @section('content')
@@ -79,10 +79,10 @@
                 </div>
 
                 <div class="card-info">
-                    <h1 class="h1" v-if="!headline" v-cloak>Чехол для {{ $device_caption }} «{{$product->name}}»
+                    <h1 class="h1" v-if="!headline" v-cloak>Чехол для {{ $device_caption }} {{$product->name}}
                         (материал {{ $case_caption }})</h1>
                     <h1 class="h1 generated" v-if="headline" v-cloak>Чехол для @{{ headline.device }}
-                        «{{$product->name}}» (материал @{{ headline.case }})</h1>
+                        {{$product->name}} (материал @{{ headline.case }})</h1>
 
 <div class="card-info__price">
                         @if (!empty($product->discount))

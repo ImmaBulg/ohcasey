@@ -132,6 +132,18 @@ class Order extends Model
         );
     }
 
+    public function getProductSum() {
+        $sum = 0;
+        foreach ($this->cart->cartSetCase as $item) {
+            $sum += $item->item_cost * $item->item_count;
+        }
+        foreach ($this->cart->cartSetProducts as $item) {
+            $sum += $item->item_cost * $item->item_count;
+        }
+
+        return $sum;
+    }
+
     /**
      * Сумма всех сопутствующих товаров.
      *

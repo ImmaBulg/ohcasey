@@ -222,6 +222,11 @@ class CartController extends Controller
             if ($case) {
                 $case->item_count = $request->get('count');
                 $case->save();
+                if ($cartHelper->get()->order) {
+                    $order = $cartHelper->get()->order;
+                    $order->order_amount = $order->getProductSum();
+                    $order->save();
+                }
                 $this->updateDiscountInfo($cartHelper);
                 return ['result' => 'success', 'data' => $this->cartObject($cartHelper)];
             } else {
@@ -250,6 +255,11 @@ class CartController extends Controller
                 $product->cartSet->item_count = $request->get('count');
                 $product->cartSet->save();
                 $product->save();
+                if ($cartHelper->get()->order) {
+                    $order = $cartHelper->get()->order;
+                    $order->order_amount = $order->getProductSum();
+                    $order->save();
+                }
                 $this->updateDiscountInfo($cartHelper);
                 return ['result' => 'success', 'data' => $this->cartObject($cartHelper)];
             } else {
@@ -275,6 +285,11 @@ class CartController extends Controller
             if ($case) {
                 $case->delete();
                 $this->updateDiscountInfo($cartHelper);
+                if ($cartHelper->get()->order) {
+                    $order = $cartHelper->get()->order;
+                    $order->order_amount = $order->getProductSum();
+                    $order->save();
+                }
                 return ['result' => 'success', 'data' => $this->cartObject($cartHelper)];
             } else {
                 return ['result' => 'error'];
@@ -301,6 +316,11 @@ class CartController extends Controller
                 $product->delete();
                 $cartSet->delete();
                 $this->updateDiscountInfo($cartHelper);
+                if ($cartHelper->get()->order) {
+                    $order = $cartHelper->get()->order;
+                    $order->order_amount = $order->getProductSum();
+                    $order->save();
+                }
                 return ['result' => 'success', 'data' => $this->cartObject($cartHelper)];
             } else {
                 return ['result' => 'error'];

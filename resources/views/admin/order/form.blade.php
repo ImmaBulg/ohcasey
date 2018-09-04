@@ -123,7 +123,7 @@
                                         <td style="width: 250px;">
                                             @php
                                                 $file = route('orders.showImage', ['order' => $order, 'hash' => $order->order_hash, 'img' => 'item_'.$item->cart_set_id.'.png']);
-                                                if (!file_exists($file) && $item->offer)
+                                                if (!file_exists($file) && $item->offer && $item->offer->product)
                                                     $file = $item->offer->product->mainPhoto();
                                             @endphp
                                             <img src="{{ $file }}"
@@ -242,8 +242,10 @@
                                     <div class="col-lg-9">
                                         <div class="row">
                                             <div class="col-lg-3">
+                                                @if (isset($item->offer->product))
                                                 <img src="{{ $item->offer->product->mainPhoto() }}"
                                                      alt="Элемент {{ $n + 1 }}" style="width: 200px;">
+                                                @endif
                                             </div>
                                             <div class="col-lg-9">
                                                 <div class="row">
@@ -263,7 +265,9 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
+                                                        @if (isset($item->offer->product))
                                                         {{ $item->offer->product->name }}
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -273,6 +277,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
+                                                        @if (isset($item->offer->product))
                                                         <div class="select">
                                                             <select id="offer_id" class="js-select-offer" name="offer_id" style="width: 100%;" data-id="{{ $item->id }}" data-order="{{ $order->order_id }}">
                                                                 @foreach ($item->offer->product->offers as $offer)
@@ -284,12 +289,14 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
+                                                        @endif
                                                         {{--{{ dump($item->offer->product->offers) }}
                                                         @if (isset($item->offer->optionValues))
                                                             {{ $item->offer->optionValues[0]->title }}
                                                         @endif--}}
                                                     </div>
                                                 </div>
+                                                @if (isset($item->offer->produt))
                                                 @if ($item->offer->product->option_group_id == 9)
                                                     {{--<div class="row">
                                                         <div class="col-lg-3 col-md-3">
@@ -333,6 +340,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                @endif
                                                 @endif
                                                 <div class="row" style="margin-top:10px;">
                                                     <div class="col-lg-3  col-md-3">

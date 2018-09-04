@@ -546,6 +546,33 @@ class OrderController extends Controller
             ]);
         });
 
+        if ($cartSetProduct->offer->product->option_group_id === 9 && in_array($cartSetProduct->cart->order->delivery_name, ['post', 'pickpoint', 'courier', 'courier_moscow'])) {
+            $order = $cartSetProduct->cart->order;
+            $cartSetProduct_count = 0;
+            $cartSetProduct_printed_count = 0;
+            foreach ($cartSetProduct->cart->cartSetProducts as $cartSetProduct) {
+                $cartSetProduct_count++;
+                if ($cartSetProduct->print_status_id == 69) {
+                    $cartSetProduct_printed_count++;
+                }
+            }
+            if ($cartSetProduct_count === $cartSetProduct_printed_count) {
+                switch($cartSetProduct->cart->order->delivery_name) {
+                    case 'post':
+                        $order->order_status_id = 4;
+                        break;
+                    case 'pickpoint':
+                    case 'courier':
+                        $order->order_status_id = 12;
+                        break;
+                    case 'courier_moscow':
+                        $order->order_status_id = 13;
+                        break;
+                }
+                $order->save();
+            }
+        }
+
         return ['answer' => 'success'];
     }
 

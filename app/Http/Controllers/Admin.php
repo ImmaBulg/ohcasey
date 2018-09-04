@@ -117,7 +117,7 @@ class Admin extends Controller
 		$ordersSumStatus = 0;
 		$orders->chunk(200, function ($ords) use (&$casesSum, &$productsSum, &$ordersSum, &$ordersSumStatus){
 			$ords->each(function ($o, $k) use (&$casesSum, &$productsSum, &$ordersSum, &$ordersSumStatus) {
-			    if (!in_array($o->order_status_id, [OrderStatus::STATUS_ID_CANCELED, OrderStatus::STATUS_ID_WAIT_PAYMENT, OrderStatus::STATUS_ID_THINKS])) {
+			    if (!in_array($o->order_status_id, [OrderStatus::STATUS_ID_CANCELED, OrderStatus::STATUS_ID_WAIT_PAYMENT, OrderStatus::STATUS_ID_THINKS, OrderStatus::STATUS_ID_NEW])) {
 			        $ordersSumStatus += $o->order_amount;
                 }
 				$ordersSum += $o->order_amount;

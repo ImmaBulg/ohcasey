@@ -96,8 +96,18 @@
             </a>
         </header>
         <div class="design-card-body">
+
             <div class="design-card-badge"></div>
-            <div class="design-card-main"></div>            
+            <div class="design-card-main">
+                <?php if ($openDesign): ?>
+                    <div style="display: none;">
+                        <?php foreach ($openDesign->getCaseDesignItems()->all() as $item): ?>
+                            <img src="/designs<?=$item->path?>" alt="<?=$openDesign->name?> на чехле смартфона" title="<?=$openDesign->name?> на чехле телефона от Ohcasey">
+                        <?php endforeach; ?>
+                    </div>
+                    <h1><?=$h1?></h1>
+                <?php endif; ?>
+            </div>
             <div class="design-card-control-row">
                 <a data-metrika="WANTITBUTTION_INST" href="#" class="filled-btn design-wish-link" target="_blank" data-analytic="want_it_card">
                     Хочу такой

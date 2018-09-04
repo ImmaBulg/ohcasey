@@ -7,6 +7,7 @@ use frontend\models\CaseDesign;
 use frontend\models\Hashtag;
 use frontend\models\Page;
 use Yii;
+use yii\helpers\VarDumper;
 use yii\web\BadRequestHttpException;
 
 /**
@@ -93,10 +94,19 @@ class MainController extends BaseController
         $hashTagName = '';
         $page = null;
         $hashTag = null;
+        $openDesign = false;
+        $h1 = '';
         if(!empty($path)){
            $caseDesign = CaseDesign::findOne($path);
             if($caseDesign){
-                $this->setMeta($caseDesign->meta_title, $caseDesign->meta_keywords, $caseDesign->meta_description);
+                $title = 'Чехол для телефона ';
+                $h1 = 'Чехол на телефон ' . $caseDesign->name;
+                foreach ($caseDesign->getCaseDesign2hashtags()->all() as $ht) {
+                    $tmp = Hashtag::find()->where(['id' => $ht->hashtag_id])->one();
+                    $title .= str_replace('#', '', $tmp->text . ' ');
+                }
+                $openDesign = $caseDesign;
+                $this->setMeta($title, $title . ', ' . $h1, $caseDesign->meta_description);
             }else{
                 $hashTag = Hashtag::find()->where('text = :text', [':text' => '#' . mb_strtolower($path)])->one();
                 if($hashTag){
@@ -126,7 +136,7 @@ class MainController extends BaseController
             $this->setMeta($page->title, $page->keywords, $page->description);
         }
 
-        return $this->render('index', compact('designs', 'banners', 'hashTags', 'hashTagName', 'hashTag', 'page'));
+        return $this->render('index', compact('designs', 'banners', 'hashTags', 'hashTagName', 'hashTag', 'page', 'openDesign', 'h1'));
     }
 
     public function actionLikeDesign($id){

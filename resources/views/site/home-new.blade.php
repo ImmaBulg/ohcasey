@@ -173,7 +173,7 @@
 
         <div class="catalog async-catalog">
             @foreach ($bestsellers as $bs)
-                <a class="catalog__item" href="{{route('shop.product.show', $bs->id)}}">
+                <a class="catalog__item" href="{{route('shop.product.show', [$bs->id, 'sort' => '', 'device' => 'iphonex', 'case' => 'silicone', 'color' => 1])}}">
                     <span class="catalog__img"><img src="{{$bs->mainPhoto()}}" alt="{{$image_alt}} {{$bs->name}}" title="{{$bs->name}} заказать"></span>
                     <span class="catalog__title">{{$bs->name}}</span>
                 </a>

@@ -216,7 +216,15 @@ class OhcaseyController extends Controller
         $cart->remove($id);
 
         // Promotion
-        if (!empty($cart->get()->promotion_code_id) && $cart->get()->summary->cnt < 3) {
+        $products = 0;
+        foreach ($cart->get()->cartSetProducts->load('offer.product') as $cartSetProduct)
+            if ($cartSetProduct->offer->product->option_group_id === 1 || $cartSetProduct->offer->product->option_group_id === 2)
+            {
+                $products++;
+            }
+        foreach ($cart->get()->cartSetCase as $cartSetCase)
+            $products += $cartSetCase->item_count;
+        if (!empty($cart->get()->promotion_code_id) && $products < 3) {
             $this->cartRemoveCode($cart);
         }
 

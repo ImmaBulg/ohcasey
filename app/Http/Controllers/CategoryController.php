@@ -119,6 +119,9 @@ class CategoryController extends Controller
                 $case = array_filter($cases[$params['device']], function ($item) use ($params) { return $item->case === $params['case']; });
             $current_options['device_name'] = $devices->filter(function($item) use ($params) { return $item->value === $params['device']; })->first()->title;
             $current_options['color_name'] = $colors->filter(function($item, $index) use ($params) { return $index === $params['device']; })->first()[$params['color']];
+            $color = OptionValue::where(['value' => $current_options['color_name']])->first();
+            if (isset($color))
+                $current_options['color_name'] = $color->title;
             $current_options['case_name'] = $case ? array_shift($case)->caption : '';
         }
 

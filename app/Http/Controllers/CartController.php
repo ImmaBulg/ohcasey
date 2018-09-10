@@ -196,14 +196,50 @@ class CartController extends Controller
      * @param CartHelper $cart
      */
 
-    public function updateDiscountInfo($cart)
+    public function updateDiscountInfo($cartHellper)
     {
-        $cart = $cart->get();
-        if (!empty($cart->promotion_code_id) && $cart->summary->cnt < 3)
+        $cart = $cartHellper->get();
+        $products = 0;
+        foreach ($cart->cartSetProducts->load('offer.product') as $cartSetProduct)
+            if ($cartSetProduct->offer->product->option_group_id === 1 || $cartSetProduct->offer->product->option_group_id === 2)
+            {
+                $products++;
+            }
+        foreach ($cart->cartSetCase as $cartSetCase)
+            $products += $cartSetCase->item_count;
+        if ($products < 3)
         {
             $cart->promotion_code_id = null;
+            if (isset($cart->order))  {
+                $cart->order->discount_amount = 0;
+                $cart->order->save();
+            }
             $cart->save();
         }
+        return $cart;
+    }
+
+    public function updateDiscountInfo2($cartHelper)
+    {
+        $cart = $cartHelper['cart'];
+        $products = 0;
+        foreach ($cart->cartSetProducts->load('offer.product') as $cartSetProduct)
+            if ($cartSetProduct->offer->product->option_group_id === 1 || $cartSetProduct->offer->product->option_group_id === 2)
+            {
+                $products++;
+            }
+        foreach ($cart->cartSetCase as $cartSetCase)
+            $products += $cartSetCase->item_count;
+        if ($products < 3)
+        {
+            $cart->promotion_code_id = null;
+            if (isset($cart->order))  {
+                $cart->order->discount_amount = 0;
+                $cart->order->save();
+            }
+            $cart->save();
+        }
+        return $cart;
     }
 
     /**
@@ -284,13 +320,13 @@ class CartController extends Controller
             $case = $cartHelper->get()->cartSetCase->find($case->getKey(), null);
             if ($case) {
                 $case->delete();
-                $this->updateDiscountInfo($cartHelper);
                 if ($cartHelper->get()->order) {
                     $order = $cartHelper->get()->order;
                     $order->order_amount = $order->getProductSum();
                     $order->save();
                 }
-                return ['result' => 'success', 'data' => $this->cartObject($cartHelper)];
+                $counts = $this->updateDiscountInfo2($this->cartObject($cartHelper));
+                return ['result' => 'success', 'data' => $this->cartObject($cartHelper), 'counts' => $counts];
             } else {
                 return ['result' => 'error'];
             }
@@ -315,12 +351,12 @@ class CartController extends Controller
                 $cartSet = $product->cartSet;
                 $product->delete();
                 $cartSet->delete();
-                $this->updateDiscountInfo($cartHelper);
                 if ($cartHelper->get()->order) {
                     $order = $cartHelper->get()->order;
                     $order->order_amount = $order->getProductSum();
                     $order->save();
                 }
+                $this->updateDiscountInfo2($this->cartObject($cartHelper));
                 return ['result' => 'success', 'data' => $this->cartObject($cartHelper)];
             } else {
                 return ['result' => 'error'];

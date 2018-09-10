@@ -74,9 +74,9 @@ class ProductController extends Controller
         $product->save();
         //dump($product);
         if ($request->all() != [] && $product->option_group_id != 1 && $product->option_group_id != 2)
-            return redirect()->route('shop.product.show', $id);
+            return redirect(route('shop.product.show', $id), 301);
         if ($request->all() == [] && ($product->option_group_id == 1 || $product->option_group_id == 2))
-            return redirect()->route('shop.product.show', [$id, 'device' => 'iphonex', 'sort' => '', 'color' => '1', 'case' => 'silicone']);
+            return redirect(route('shop.product.show', [$id, 'device' => 'iphonex', 'sort' => '', 'color' => '1', 'case' => 'silicone']), 301);
         else
             switch ($product->option_group_id) {
                 case OptionGroup::ID_CASE_GROUP:

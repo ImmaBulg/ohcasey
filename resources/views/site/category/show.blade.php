@@ -116,7 +116,7 @@ foreach($breadcrumbs as $b) {
                     <div class="filter" v-show="isCollection" v-cloak>
                         <button class="btn filter__btn js-popup-open" data-popup="filter" type="button" @click="selectColor(selectedPalette[$route.query.color], $route.query.color)">Фильтры</button>
 
-                        <div class="filter__small-hidden">
+                        <div class="filter__small-hidden" style="display: flex; align-items: center;">
                             <div class="filter__select">
                                 <div class="select">
                                     <select class="js-select-item-device" data-placeholder="Телефон">
@@ -147,7 +147,11 @@ foreach($breadcrumbs as $b) {
 									<select id="colors-mobile"></select>
 								</div>
 							</div>
-							
+
+                            <div style="padding-left: 20px;">
+                                <a class="btn" :href="routeString">Показать</a>
+                            </div>
+
                         </div>
 
                         <div class="filter__sort js-sort">

@@ -1367,7 +1367,7 @@ var DesignCard = function (_BasicClass2) {
         value: function render() {
             var activeDesign = store.state.entities[this.state.designId];
             var $cardRoot = $('.design-card');
-
+            console.log(activeDesign);
             if (!activeDesign || !this.state.isOpen) return null;
 
             var $body = $('body, .header');
@@ -1386,9 +1386,9 @@ var DesignCard = function (_BasicClass2) {
             var hashTags = "";
             activeDesign.hashTags.map(function (hashtag, index) {
                 hashTags += "<a href=\"" + (BASE_URL + "/" + hashtag.replace('#', '')) + "\" class=\"design-card__hashtag\" data-analytic=\"tag_card\" data-metrika=\"HASHTAGBUTTION_INST\">\n                            " + (index === 0 ? '<h1>' + h1 + '</h1>': hashtag) + "\n                        </a>";
-                title += (hashtag.replace('#', '') + ' ');
+                title += (hashtag.replace('#', '').replace('_', ' ') + ' ');
             });
-            $('meta[name=keywords]').attr('content', title + ', ' + h1);
+            $('meta[name=keywords]').attr('content', activeDesign.meta_keywords != '' ? activeDesign.meta_keywords : title + ', ' + h1);
             $('.design-card-hashtags').html(hashTags);
 
             //Вставляем слайды
@@ -1407,7 +1407,7 @@ var DesignCard = function (_BasicClass2) {
             $('.design-description').html(activeDesign.description);
             $('.design-card-related-grid').html(this.getRelatedItems());
             //$('.design-wish-link').attr('href', activeDesign.link ? activeDesign.link : '#');
-            document.title = title;
+            document.title = activeDesign.meta_title != '' ? activeDesign.meta_title : title;
 
         }
     }]);

@@ -28,6 +28,9 @@ class CategoryController extends Controller
             return redirect('/kruzhki', 301);
         $category = Category::whereSlug($lastSlugPart)->first();
         if ($category == null or $category->slug != $lastSlugPart or $category->active == false) {
+            if ($lastSlugPart == 'about-cases') {
+                return redirect('/cases', 301);
+            }
             return redirect('/collections', 301);
         }
 

@@ -73,9 +73,9 @@ class ProductController extends Controller
         ++$product->view_count;
         $product->save();
         //dump($product);
-        if ($request->all() != [] && $product->option_group_id != 1 && $product->option_group_id != 2)
+        if ($request->all() != [] && $request->all() != ['device' => 'iphonex', 'sort' => '', 'color' => '1', 'case' => 'silicone'] && $product->option_group_id != 1 && $product->option_group_id != 2)
             return redirect(route('shop.product.show', $id), 301);
-        if ($request->all() == [] && ($product->option_group_id == 1 || $product->option_group_id == 2))
+        if (($request->all() == [] ||  $request->all() == ['sort' => '', 'device' => 'iphone']) && ($product->option_group_id == 1 || $product->option_group_id == 2))
             return redirect(route('shop.product.show', [$id, 'device' => 'iphonex', 'sort' => '', 'color' => '1', 'case' => 'silicone']), 301);
         else
             switch ($product->option_group_id) {
@@ -116,7 +116,10 @@ class ProductController extends Controller
         array_push($breadcrumbs, ['href' => $category->url, 'name' => $category->name]);
         array_push($breadcrumbs, ['name' => $product->name]);
 
-        return view('site.shop.product.default.show', compact('product', 'breadcrumbs'));
+        $device_name = request()->get('device', 'iphone7');
+        $device_caption = OptionValue::where('value', $device_name)->value('title');
+
+        return view('site.shop.product.default.show', compact('product', 'breadcrumbs', 'device_caption'));
     }
 
     public function showCase(Product $product)

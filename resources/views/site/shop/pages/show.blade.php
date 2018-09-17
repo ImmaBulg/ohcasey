@@ -8,5 +8,10 @@
 	<div class="container">
 		<h1>{{$page->h1}}</h1>
 	</div>
-    {!! $page->content !!}
+	@if ($page->slug === 'catalog')
+		<div style="padding-left: 4%;">
+			@include('site.shop.partial.left-menu')
+		</div>
+	@endif
+		{!! $page->content !!}
 @endsection

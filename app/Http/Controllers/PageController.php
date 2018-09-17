@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shop\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,10 +17,15 @@ class PageController extends Controller
      */
     public function show($page)
     {
+        $children = [];
+        $category = null;
     	if ($page->slug === 'coll')
     		return redirect('/collections', 301);
         if ($page->slug === "catalog")
         {
+            $category = Category::whereSlug('catalog')->first();
+            if ($category)
+                $children = $category->selfChildren()->active()->get();
             $bestsellers = $this->getTopItems($offset = 0, $limit = 8);
             if ($bestsellers->count()) 
             {
@@ -38,7 +44,7 @@ class PageController extends Controller
         }
         if (mb_substr_count($page['content'], '<div class="inner">') == 0)
             $page['content'] = '<div class="inner"><div class="container">' . $page['content'] . '</div></div>';
-        return view('site.shop.pages.show', compact('page'));
+        return view('site.shop.pages.show', ['page' => $page, 'children' => $children, 'category' => $category]);
     }
 
     private function getTopItems($offset = 0, $limit = 12)

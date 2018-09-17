@@ -16,6 +16,7 @@
     <!-- Datepicker -->
     <script src="{{ url('js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ url('js/bootstrap-datepicker.ru.min.js') }}"></script>
+    <script src="{{ url('js/intlTelInput.min.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url('css/perfect-scrollbar.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ _el('css/app.css') }}"/>
@@ -101,6 +102,7 @@
 
 </head>
 <body class="custom-template">
+@yield('popup')
 @if(env('APP_ENV') == 'production')
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTHTM6P"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

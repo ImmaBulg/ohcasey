@@ -9,6 +9,8 @@
 	<script type="application/javascript" src="{{ url('js/bootstrap-datepicker.js') }}"></script>
 	<script type="application/javascript" src="{{ url('js/bootstrap-datepicker.ru.min.js') }}"></script>
 	<script type="application/javascript" src="{{ url('js/validator.js') }}"></script>
+    <script src="{{ url('js/jquery.mask.min.js') }}"></script>
+
 	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 	<link rel="stylesheet" href="{{ url('css/select2.css') }}">
 	<link rel="stylesheet" href="{{ url('css/bootstrap-datepicker3.css') }}">
@@ -30,7 +32,45 @@
         <!-- End of Google Analytics Content Experiment code -->
     @endif
 @endsection
+
+@section('popup')
+<div class="popup-error-validate" style="display: none;">
+                <div class="popup-error">
+                    <div class="head_popup">
+                        <span>Ошибка!</span>
+                    </div>
+                    <div class="body_popup">
+                        <span class="body_popup__text">Необходимо корректно заполнить поле "E-mail" или "Телефон"</span>
+                    </div>
+                    <div class="footer-popup">
+                        <div class="btn">
+                            OK
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="popup-check-validate">
+    <div class="popup-check">
+        <div class="head_popup">
+            <span>Проверьте данные</span>
+        </div>
+        <div class="body_popup">
+            <span class="body_popup__text"></span>
+        </div>
+        <div class="footer-popup">
+            <div class="btn btn_ok">
+                Все верно
+            </div>
+            <div class="btn btn_edit">
+                Изменить
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('content')
+
     <div id="cart" class="container-fluid">
         <a class="row add-header" href="{{ url('custom') }}#bg">
             <span class="icon-plus"></span>&nbsp;&nbsp;&nbsp;&nbsp;СОЗДАТЬ ЧЕХОЛ
@@ -75,7 +115,7 @@
                                     <input type="hidden" name="full" value="1">
                                     <input class="form-group form-control" autocomplete="off" name="name" data-mandatory="true" type="text" id="name" placeholder="Фамилия, Имя">
                                     <input class="form-group form-control" autocomplete="off" name="email" data-mandatory="true" type="email" id="email" placeholder="Email">
-                                    <input class="form-group form-control" autocomplete="off" name="phone" data-mandatory="true" type="text" id="phone" placeholder="Телефон">
+                                    <input class="form-group form-control" autocomplete="off" name="phone" data-mandatory="true" type="tel" id="phone" placeholder="Телефон">
                                     <hr />
                                     <h5>Выберите способ доставки</h5>
                                     @include('_partial.delivery_chooser')
@@ -211,8 +251,10 @@
                     </div>
                 </div>
             </div>
+
         @endif
     </div>
+
 @endsection
 
 <style>

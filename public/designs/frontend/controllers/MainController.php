@@ -66,9 +66,9 @@ class MainController extends BaseController
                 'description' => $design['description'],
                 'link' => $design['link'],
                 'h1' => $design['h1'],
-                'meta_title' => $page->title,
-                'meta_keywords' => $page->keywords,
-                'meta_description' => $page->description,
+                'meta_title' => $design['meta_title'],
+                'meta_keywords' => $design['meta_keywords'],
+                'meta_description' => $design['meta_description'],
                 'likesCount' => (int)$design['likes_count'],
                 'timeStamp' => $design['created_at'] * 1000, //Для js переводим в милисекунды
                 'hashTags' => array_values(array_unique($hashTags)),
@@ -103,10 +103,10 @@ class MainController extends BaseController
                 $h1 = 'Чехол на телефон ' . $caseDesign->name;
                 foreach ($caseDesign->getCaseDesign2hashtags()->all() as $ht) {
                     $tmp = Hashtag::find()->where(['id' => $ht->hashtag_id])->one();
-                    $title .= str_replace('#', '', $tmp->text . ' ');
+                    $title .= str_replace('#', '', str_replace('_', ' ', $tmp->text) . ' ');
                 }
                 $openDesign = $caseDesign;
-                $this->setMeta($title, $title . ', ' . $h1, $caseDesign->meta_description);
+                $this->setMeta($caseDesign->meta_title != '' ? $caseDesign->meta_title : $title, $caseDesign->meta_keywords != '' ? $caseDesign->meta_keywords : $title . ', ' . $h1, $caseDesign->meta_description);
             }else{
                 $hashTag = Hashtag::find()->where('text = :text', [':text' => '#' . mb_strtolower($path)])->one();
                 if($hashTag){

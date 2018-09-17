@@ -1,0 +1,31 @@
+a.well{
+    color: #000000;
+}
+.stat-block-container{
+    width: 100%;
+    overflow-x: scroll;
+}
+.stat-cell{
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    float: left;
+    width: 180px;
+}
+.stat-cell{
+	font-size: 26px;
+	margin-bottom: 10px;
+}
+.stat-cell .well{
+	min-height: 100%;
+}
+.stat-cell h5, .stat-cell .h5{
+	font-size: 12px;
+}
+.stat-cell h1, .stat-cell .h1{
+	font-size: 20px;
+}
+.stat-cell .icon-rouble{
+	font-size: 18px;
+}

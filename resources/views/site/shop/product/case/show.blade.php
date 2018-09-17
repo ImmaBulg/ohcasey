@@ -10,6 +10,9 @@
 @section('description', strip_tags($product->description))
 
 @section('content')
+    @php
+        $deivces = [];
+    @endphp
     <div class="inner inner--banner-bottom inner-popup">
         <!-- Add to cart product modal view-->
         <script type="text/x-template" id="modal-template">
@@ -277,6 +280,8 @@
             color: {!! json_encode($colors) !!},
             case: {!! json_encode($cases) !!}
         }
+        window.devices = {!! json_encode($devices) !!}
+        window.cases_page = true;
 </script>
 <script src="/js/frontcommons.js"></script>
 <script src="{{url('js/product_show.js')}}"></script>

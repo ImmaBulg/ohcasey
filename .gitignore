@@ -25,8 +25,8 @@ Thumbs.db
 !/public/storage/.htaccess
 /public/orders
 /public/rev-manifest.json
-/public/css
-/public/js
+/public/js/ckeditor
+/public/js/kcfinder
 /public/fonts
 
 # Other

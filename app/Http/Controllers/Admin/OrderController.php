@@ -347,16 +347,16 @@ class OrderController extends Controller
         if ($request->has('status')) {
             $order->order_status_id = (int) $request->get('status');
         }
-		
-		//изменение статуса оплаты
-		if(in_array($order->order_status_id, [OrderStatus::STATUS_ID_FINISHED, OrderStatus::STATUS_ID_IN_PRINT])){
-			$order->payments()->update(['is_paid' => true]);
-			$order->processed_online_payment = false;
-		}
-
         $order->save();
 
         return response()->json($order);
+		//изменение статуса оплаты
+		/*if(in_array($order->order_status_id, [OrderStatus::STATUS_ID_FINISHED, OrderStatus::STATUS_ID_IN_PRINT])){
+			$order->payments()->update(['is_paid' => true]);
+			$order->processed_online_payment = false;
+		}*/
+
+
     }
 
     /**

@@ -61,7 +61,8 @@
 	</script>
 </head>
 <body>
-	
+@yield('popup')
+
 @if(env('APP_ENV') == 'production')
 <!-- Facebook Pixel Code -->
 	<script>
@@ -184,37 +185,181 @@
 <footer class="footer js-footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                <ul class="foot-nav" style="display:block; {{--display:flex--}}">
-                    <li class="foot-nav__item">
-                        <a href="{{route('shop.slug', 'cases')}}" class="foot-nav__link">Каталог</a>
-                    </li>
-                    <li class="foot-nav__item">
-                        <a href="/custom" class="foot-nav__link">Конструктор чехлов</a>
-                    </li>
+            <div class="col-lg-10 col-md-8 col-sm-7 col-xs-12 footer-navig">
+                <div>
+                    <ul class="foot-nav" style="display:block; {{--display:flex--}}">
+                        <li class="foot-nav__item">
+                            <a href="/catalog" class="foot-nav__link">Чехлы на Айфон</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="/product" class="foot-nav__link">Оригинальные чехлы на Айфон</a>
+                        </li>
 
-                    <li class="foot-nav__item">
-                        <a href="{{route('shop.slug', 'collections')}}" class="foot-nav__link">Коллекции</a>
-                    </li>
-                    {{--
-                    <li class="foot-nav__item">
-                        <a href="#" class="foot-nav__link">Оптовые заказы</a>
-                    </li>
-                    <li class="foot-nav__item">
-                        <a href="#" class="foot-nav__link">О наших чехлах</a>
-                    </li>--}}
-                    <li class="foot-nav__item">
-                        <a href="{{route('shop.slug', 'delivery')}}" class="foot-nav__link">Доставка и оплата</a>
-                    </li>
-                    <li class="foot-nav__item">
-                        <a href="{{route('shop.slug', 'contacts')}}" class="foot-nav__link">Контакты</a>
-                    </li>
-                </ul>
+                        <li class="foot-nav__item">
+                            <a href="/collections" class="foot-nav__link">Дизайнерские чехлы для iPhone</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/collections/fashion?sort=&device=iphone" class="foot-nav__link">Крутые чехлы на Айфон</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/collections/zimnie?sort=&device=iphone" class="foot-nav__link">Новогодние чехлы</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/collections/sport?sort=&device=iphone" class="foot-nav__link">Спортивный чехол для iPhone</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/collections/zhivotnye?sort=&device=iphone" class="foot-nav__link">Чехол на Айфон с животными</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/collections/top_30?sort=&device=iphone" class="foot-nav__link">Прикольные чехлы на Айфон</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/collections/love?sort=&device=iphone" class="foot-nav__link">Чехол на Айфон с сердечком</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/collections/muzhchinam?sort=&device=iphone" class="foot-nav__link">Мужской чехол на Айфон</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/glitter" class="foot-nav__link">Чехлы с блестками и водой</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="foot-nav" style="display:block; {{--display:flex--}}">
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/custom" class="foot-nav__link">Конструктор чехлов</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/designs/" class="foot-nav__link">Чехлы на телефон на заказ</a>
+                        </li>
+
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/принты" class="foot-nav__link">Принт на чехол для телефона</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/designs/чехлы_с_надписями" class="foot-nav__link">Чехол с надписью на заказ</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/designs/именные_чехлы" class="foot-nav__link">Именной чехол</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/designs/объемные_чехлы" class="foot-nav__link">Объемные чехлы на телефон</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/designs/модные" class="foot-nav__link">Модные чехлы для телефонов</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/designs/красивые" class="foot-nav__link">Красивые чехлы</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/designs/единороги" class="foot-nav__link">Чехол для телефона в виде Единорога</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/designs/мороженое" class="foot-nav__link">Чехол Мороженое</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/designs/спартак" class="foot-nav__link">Чехол Спартак</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="foot-nav" style="display:block; {{--display:flex--}}">
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_4s?sort=&device=iphone" class="foot-nav__link">Чехлы на Айфон 4s</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_5?sort=&device=iphone" class="foot-nav__link">Чехлы на 5 Айфон</a>
+                        </li>
+
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_5s?sort=&device=iphone" class="foot-nav__link">Чехлы на Айфон 5 s</a>
+                        </li>
+
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_6?sort=&device=iphone" class="foot-nav__link">Чехлы на Айфон 6</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_6_plus?sort=&device=iphone" class="foot-nav__link">Чехлы на Айфон 6 плюс</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_6s?sort=&device=iphone" class="foot-nav__link">Чехлы на Айфон 6 s</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_7?sort=&device=iphone" class="foot-nav__link">Чехол на Айфон 7</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_7_plus?sort=&device=iphone" class="foot-nav__link">Чехол на Айфон 7 plus</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_8?sort=&device=iphone" class="foot-nav__link">Чехол на Айфон 8</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_8_plus?sort=&device=iphone" class="foot-nav__link">Чехол на Айфон 8 plus</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/iphone_x?sort=&device=iphone" class="foot-nav__link">Чехол для iPhone X</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="foot-nav" style="display:block; {{--display:flex--}}">
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/galaxy_s6?sort=&device=iphone" class="foot-nav__link">Чехол для Samsung Galaxy s6</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/galaxy_s6_edge?sort=&device=iphone" class="foot-nav__link">Чехол для Samsung Galaxy s6 Edge</a>
+                        </li>
+
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/galaxy_s7?sort=&device=iphone" class="foot-nav__link">Чехол для Samsung Galaxy s7</a>
+                        </li>
+                        {{--
+                        <li class="foot-nav__item">
+                            <a href="#" class="foot-nav__link">Оптовые заказы</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="#" class="foot-nav__link">О наших чехлах</a>
+                        </li>--}}
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/catalog/galaxy_s7_edge?sort=&device=iphone" class="foot-nav__link">Чехол для Samsung Galaxy s7 Edge</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="foot-nav" style="display:block; {{--display:flex--}}">
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/futbolki" class="foot-nav__link">Футболки</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store" class="foot-nav__link">Чехлы на телефоны</a>
+                        </li>
+
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/custom" class="foot-nav__link">Создай свой чехол</a>
+                        </li>
+                        {{--
+                        <li class="foot-nav__item">
+                            <a href="#" class="foot-nav__link">Оптовые заказы</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="#" class="foot-nav__link">О наших чехлах</a>
+                        </li>--}}
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/cases" class="foot-nav__link">Силиконовые чехлы</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="https://ohcasey.store/delivery" class="foot-nav__link">Доставка чехлов</a>
+                        </li>
+                        <li class="foot-nav__item">
+                            <a href="{{route('shop.slug', 'contacts')}}" class="foot-nav__link">Контакты</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
+            <div class="col-lg-2 col-md-4 col-sm-5 col-xs-12">
                 <div class="phone">
                     <div class="phone__title">По всем вопросам звоните:</div>
-                    <a class="phone__num" href="tel:+7(965)3969785">+7 (965) 396-97-85</a>
+                    <a class="phone__num" href="tel:+7(965)3969785" style="font-size: 16px">+7 (965) 396-97-85</a>
                 </div>
                 <a class="social social--instagram" href="https://www.instagram.com/_ohcasey_" target="_blank">
                     <span class="social__icon"><svg class="svg-icon" viewBox="0 0 16 16"><use

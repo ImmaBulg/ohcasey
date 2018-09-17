@@ -242,6 +242,7 @@ class WidgetCounters
 			->leftJoin('cart', 'cart.cart_id', '=', 'cart_set_case.cart_id')
 			->leftJoin('order', 'order.order_id', '=', 'cart.cart_order_id')
 			->whereBetween('order.order_ts', [$dateStart, $dateEnd])
+            ->whereNull('order.deleted_at')
 			->first();
 		$allCasesSum = $setCaseSum->sum;
 		$queries['allCasesSum'] = $allCasesSum;

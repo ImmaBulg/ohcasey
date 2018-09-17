@@ -40,7 +40,7 @@ class IndexController extends Controller
 	{
 		$res = '';
 		foreach($topItems as $topItem){
-			$res .= '<a class="catalog__item" href="'. route('shop.product.show', $topItem->id) .'">
+			$res .= '<a class="catalog__item" href="'. route('shop.product.show', [$topItem->id, 'sort' => '', 'device' => 'iphonex', 'case' => 'silicone', 'color' => '1']) .'">
                     <span class="catalog__img"><img src="'.$topItem->mainPhoto().'" alt="Купить чехол для телефона '. $topItem->name . '" title="' . $topItem->name . ' заказать"></span>
                     <span class="catalog__title">'.$topItem->name.'</span>
                 </a>';
@@ -66,5 +66,4 @@ class IndexController extends Controller
 			->get();
 		return $top;
 	}
-	
 }

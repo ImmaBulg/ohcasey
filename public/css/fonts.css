@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'avb';
+    src:
+     url('fonts/AvenirNextCyr-Demi.woff') format('woff'), 
+      url('fonts/AvenirNextCyr-Demi.svg#AvenirNextCyr-Demi') format('svg'),
+     url('fonts/AvenirNextCyr-Demi.ttf') format('truetype');
+    font-style: normal;
+}
+@font-face {
+    font-family: 'avr';
+    src:
+     url('fonts/AvenirNextCyr-Regular.woff') format('woff'), 
+      url('fonts/AvenirNextCyr-Regular.svg#AvenirNextCyr-Regular') format('svg'),
+     url('fonts/AvenirNextCyr-Regular.ttf') format('truetype');
+    font-style: normal;
+}

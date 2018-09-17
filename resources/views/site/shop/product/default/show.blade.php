@@ -1,10 +1,27 @@
 @extends('site.layouts.app')
-
-@section('title', $product->title)
-@section('keywords', $product->keywords)
+@php
+    if ($product->option_group_id === 2) {
+        $product_name = str_replace('Чехол ', '', $product->name);
+        $title = "Чехол для $device_caption $product_name материал силиконовый";
+        $description = "Чехол для $device_caption $product_name материал силиконовый";
+        $alt = "Чехол для $device_caption $product_name Ohcasey";
+        $title = $product->name;
+    } else {
+        $product_name = $product->name;
+        $title = $product->name;
+        $description = $product->name;
+        $alt = $product->name;
+        $title = $product->name;
+    }
+@endphp
+@section('title', $title)
+@section('keywords', $description)
 @section('description', strip_tags($product->description))
 
 @section('content')
+    @php
+        $deivces = [];
+    @endphp
     <div class="inner inner--banner-bottom inner-popup">
         <style>
             .card:after {
@@ -31,8 +48,8 @@
                             <div class="cart-list__img">
                                 <img v-if="item.item_source"
                                      :src="'/api/product/image?bgName=' + item.item_source.DEVICE.bg + '&deviceName=' + item.device_name + '&deviceColorIndex=' + item.item_source.DEVICE.color + '&caseFileName=' + item.item_source.DEVICE.casey"
-                                     alt="">
-                                <img v-if="!item.item_source" :src="item.offer.product.main_photo_url" alt="">
+                                     alt="{{$alt}}" title="{{$title}}">
+                                <img v-if="!item.item_source" :src="item.offer.product.main_photo_url" alt="{{$alt}}" title="{{$title}}">
                             </div>
                             <div class="cart-list__desc">
                                 <div class="cart-list__title" v-if="item.offer">@{{ item.offer.product.name }}</div>
@@ -62,7 +79,7 @@
                 </div>
             </div>
         </script>
-		
+
         <div class="container" id="app">
 
             @include('site.shop.partial.breadcrumbs')
@@ -72,7 +89,7 @@
                     <div class="slider__main js-slider-for">
                         @foreach ($product->photos as $photo)
                             <div>
-                                <img src="{{$photo->url}}" alt="{{$product->name}}" title="{{$product->name}}">
+                                <img src="{{$photo->url}}" alt="{{$alt}}" title="{{$title}}">
                             </div>
                         @endforeach
                     </div>
@@ -80,7 +97,7 @@
                     <div class="slider__nav js-slider-nav">
                         @foreach ($product->photos as $photo)
                             <div>
-                                <img src="{{$photo->url}}" alt="{{$product->name}}" title="{{$product->name}}">
+                                <img src="{{$photo->url}}" alt="{{$alt}}" title="{{$title}}">
                             </div>
                         @endforeach
                     </div>
@@ -106,8 +123,17 @@
                             <div class="card-info__body">
                                 <div class="select">
                                     <select id="offer_id" class="js-select-item" name="offer_id">
+                                        @php
+                                            $devices = [];
+                                            foreach ($product->offers as $offer) {
+                                                if ($offer->optionValues->implode('title', ', ') !== '')
+                                                    $devices[$offer->id] = strtolower(str_replace(' ', '', $offer->optionValues->implode('title', ', ')));
+                                                else
+                                                    $devices[$offer->id] = strtolower(str_replace(' ', '', 'iphone7'));
+                                            }
+                                        @endphp
                                         @foreach ($product->offers as $offer)
-                                            <option value="{{$offer->id}}">{{$offer->optionValues->implode('title', ', ')}}</option>
+                                            <option {{ !isset($_GET['device']) ? '' : array_search($_GET['device'], $devices) === $offer->id ? 'selected' : '' }} value="{{$offer->id}}">{{$offer->optionValues->implode('title', ', ') !== '' ? $offer->optionValues->implode('title', ', ') : 'Iphone 7'}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -257,6 +283,8 @@ $(document).ready(function(){
 		 }
 	   }
 	});
-});	
+});
+window.devices = {!! json_encode($devices) !!}
+    window.glitter_page = true;
 </script>
 @endpush

@@ -60,13 +60,13 @@
 
                                 <div class="form__field">
                                     <label for="" class="form__label" id="input-email">Email</label>
-                                    <input class="form__input" type="text" name="email" id="email">
+                                    <input class="form__input" type="email" name="email" id="email">
                                 </div>
                             @endif
 
                             <div class="form__field form__field--phone">
                                 <label for="" class="form__label" id="input-phone">Телефон</label>
-                                <input class="form__input js-phone-mask"  maxlength="17" id="phone" name="phone" type="text">
+                                <input class="form__input js-phone-mask"  maxlength="17" id="phone" name="phone" type="tel">
                             </div>
                         </div>
 
@@ -347,6 +347,39 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="popup-error-validate">
+        <div class="popup-error">
+            <div class="head_popup">
+                <span>Ошибка!</span>
+            </div>
+            <div class="body_popup">
+                <span class="body_popup__text"></span>
+            </div>
+            <div class="footer-popup">
+                <div class="btn">
+                    OK
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup-check-validate">
+        <div class="popup-check">
+            <div class="head_popup">
+                <span>Проверьте данные</span>
+            </div>
+            <div class="body_popup">
+                <span class="body_popup__text"></span>
+            </div>
+            <div class="footer-popup">
+                <div class="btn btn_ok">
+                    Все верно
+                </div>
+                <div class="btn btn_edit">
+                    Изменить
+                </div>
+            </div>
         </div>
     </div>
 @endsection

@@ -9,10 +9,30 @@
     RewriteEngine On
 
     # SEO Redirect
+    RewriteCond %{REQUEST_URI} about-cases
+    RewriteRule .* https://%{HTTP_HOST}/cases [R=301]
+
     RewriteCond %{QUERY_STRING} !sort=&device=(.*)
     RewriteCond %{REQUEST_URI} collections/(.*)
     RewriteCond %{REQUEST_URI} !collections/$
     RewriteRule ^collections/(.*)$ https://%{HTTP_HOST}/collections/$1?sort=&device=iphone [R=301,QSA,L]
+
+    RewriteCond %{QUERY_STRING} !sort=&device=(.*)
+    RewriteCond %{REQUEST_URI} catalog/(.*)
+    RewriteCond %{REQUEST_URI} !catalog/$
+    RewriteRule ^catalog/(.*)$ https://%{HTTP_HOST}/catalog/$1?sort=&device=iphone [R=301,QSA,L]
+
+    RewriteCond %{QUERY_STRING} sort=&device=iphone$
+    RewriteCond %{REQUEST_URI} collections
+    RewriteRule ^collections$ https://%{HTTP_HOST}/collections [R=301,L,QSD]
+
+    RewriteCond %{QUERY_STRING} sort=&device=iphone$
+    RewriteCond %{REQUEST_URI} collections/
+    RewriteRule ^collections/$ https://%{HTTP_HOST}/collections [R=301,L,QSD]
+
+    RewriteCond %{QUERY_STRING} (.+)
+    RewriteCond %{REQUEST_URI} glitter
+    RewriteRule ^glitter$ https://%{HTTP_HOST}/glitter [R=301,L,QSD]
 
     # Redirect on https
     #RewriteCond %{SERVER_PORT} !^443$

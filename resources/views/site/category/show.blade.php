@@ -148,8 +148,8 @@ foreach($breadcrumbs as $b) {
 								</div>
 							</div>
 
-                            <div style="padding-left: 20px;">
-                                <a class="btn" :href="routeString">Показать</a>
+                            <div style="padding-left: 20px; margin-top: -5px;">
+                                <a class="btn btn-show" :href="routeString">Показать</a>
                             </div>
 
                         </div>

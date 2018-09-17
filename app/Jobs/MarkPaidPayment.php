@@ -32,7 +32,7 @@ class MarkPaidPayment extends Job
     public function handle()
     {
         if (! $this->payment->isPaid()) {
-            $this->payment->is_paid = true;
+        $this->payment->is_paid = true;
             $this->payment->paid_date = Carbon::now();
             $this->payment->save();
             event(new PaymentPaid($this->payment));

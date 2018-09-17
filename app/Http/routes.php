@@ -177,7 +177,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::get('cart/img/{id}', "Admin@cartImg");
     Route::get('get_csv', 'Admin@getCsv')->name('admin.get_csv');
     Route::get('get_back_csv', 'Admin@getBackCsv')->name('admin.get_back_csv');
-
+    Route::get('/setcat', 'SetCategories@setCategories');
 
     Route::group(['middleware' => 'userrole'], function () {
         Route::get('dashboards', 'Admin@dashboards')->name('admin.dashboards');
